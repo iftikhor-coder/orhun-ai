@@ -1,0 +1,13 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.4.0
+torchaudio==2.4.0
+gradio==4.44.0
+spaces
+git+https://github.com/ace-step/ACE-Step-1.5.git
+transformers>=4.44.0
+accelerate>=0.33.0
+diffusers>=0.30.0
+librosa>=0.10.0
+soundfile>=0.12.0
+numpy<2.0
+huggingface_hub>=0.25.0

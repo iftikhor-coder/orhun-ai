@@ -1,0 +1,43 @@
+# Environment variables — HECH QACHON commit qilmang!
+.env
+.env.local
+.env*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+out/
+.vercel/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Supabase local
+**/supabase/.branches
+**/supabase/.temp
+
+# Audio test files
+*.mp3
+*.wav
+*.flac
+!huggingface-space/examples/*.mp3
