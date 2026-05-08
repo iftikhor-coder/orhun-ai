@@ -65,3 +65,5 @@ frontend/
 - Week 3: Create page + Modal API integration
 - Week 4: Audio player
 - Week 5: Explore + Like + Comment
+
+chore: trigger redeploy
