@@ -1,75 +1,67 @@
-# Frontend setup (Next.js + Tailwind + Supabase)
+# Orhun AI — Frontend
 
-Bu papkada Next.js loyihasi turadi. Birinchi marta sozlash uchun:
+Next.js 14 + Tailwind + Supabase + i18n (4 languages)
 
-## 1) Loyihani yaratish (kompyuteringizda)
-
-```bash
-cd orhun-ai/
-# frontend papkasini o'chirib qaytadan yarating
-rm -rf frontend
-npx create-next-app@latest frontend --typescript --tailwind --app --no-src-dir --import-alias "@/*" --eslint
-cd frontend
-```
-
-## 2) Kerakli paketlar
+## Setup
 
 ```bash
-npm install @supabase/supabase-js @supabase/ssr next-intl howler zustand lucide-react clsx tailwind-merge
-npm install -D @types/howler
-```
-
-## 3) shadcn/ui
-
-```bash
-npx shadcn@latest init
-```
-
-Tanlovlar:
-- Style: **New York**
-- Base color: **Slate**
-- CSS variables: **Yes**
-
-Boshlang'ich komponentlar:
-```bash
-npx shadcn@latest add button input label card dialog dropdown-menu toast avatar
-```
-
-## 4) Environment variables
-
-`frontend/.env.local` yarating:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...
-NEXT_PUBLIC_BACKEND_URL=http://YOUR-ORACLE-IP:8000
-```
-
-## 5) Test ishga tushirish
-
-```bash
+npm install
+cp .env.local.example .env.local
+# Filled .env.local with Supabase keys
 npm run dev
 ```
 
-http://localhost:3000 ochiladi → "Hello, Next.js!" ko'rinishi kerak.
+`http://localhost:3000` will open.
 
-## 6) Vercel'ga deploy
+## Vercell deploy
 
-1. GitHub'ga push qiling
-2. vercel.com → New Project → orhun-ai repo
-3. **Root Directory: `frontend`** ⚠️
-4. Environment Variables qo'shing (yuqoridagi 3 ta)
-5. Deploy
+1. Push status to GitHub
+2. Connected in Vercel
+3. Root Directory: `frontend`
+4. Environment Variables: 
+- `NEXT_PUBLIC_SUPABASE_URL` 
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+5. Deploy!
 
-## Keyingi qadamlar
+## Structure
 
-Hafta 2'da men quyidagilarni tayyorlayman:
-- `app/[locale]/layout.tsx` — root layout
-- `lib/supabase/client.ts` — Supabase client
-- `lib/supabase/server.ts` — server-side Supabase
-- `middleware.ts` — auth + i18n routing
-- `messages/en.json, uz.json, az.json, tr.json` — tarjimalar
-- `app/[locale]/login/page.tsx` — login UI
-- `app/[locale]/onboarding/...` — 3 ta onboarding ekran
+```
+frontend/
+├── app/
+│ ├── [locale]/ # i18n routes (en/uz/az/tr)
+│ │ ├── login/ ✅ Ready
+│ │ ├── onboarding/ ⚙️ Skeleton (Week 2)
+│ │ ├── home/ ⚙️ Skeleton (Week 3)
+│ │ ├── create/ ⚙️ Skeleton (Week 3)
+│ │ └── explore/ ⚙️ Skeleton (Week 5)
+│ ├── globals.css # Orhun theme
+│ └── layout.tsx
+├── components/
+│ ├── logo.tsx # Brand logo
+│ └── language-switcher.tsx
+├── lib/
+│ ├── supabase/ # Supabase clients
+│ └── utils.ts
+├── messages/ # 4 language translations
+│ ├── en.json
+│ ├── en.json
+│ ├── en.json
+│ └── tr.json
+├── i18n/
+│ └── request.ts # next-intl config
+└── middleware.ts # i18n routing
 
-Bularni Hafta 1 fundament tayyor bo'lgandan keyin yozaman.
+```
+## Design
+
+- **Theme:** Deep midnight blue + ancient Turkic gold
+- **Fonts:** Cormorant Garamond (display) + Plus Jakarta Sans (body)
+- **Style:** Inspired by the ancient Orhun stones
+- **Language:** EN (default) + UZ + AZ + TR
+
+## Next steps
+
+- Week 2: Onboarding complete (DOB + Profile + Genres)
+- Week 3: Create page + Modal API integration
+- Week 4: Audio player
+- Week 5: Explore + Like + Comment

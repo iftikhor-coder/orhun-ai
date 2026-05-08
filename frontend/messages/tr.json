@@ -1,0 +1,113 @@
+{
+  "Brand": {
+    "name": "Orhun AI",
+    "tagline": "müzik"
+  },
+  "Login": {
+    "welcome": "Hoş geldiniz",
+    "subtitle": "Kadim şarkılar yeni seslerle buluşuyor",
+    "google": "Google ile devam et",
+    "or": "veya",
+    "email": "E-posta",
+    "emailPlaceholder": "siz@example.com",
+    "password": "Şifre",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Giriş Yap",
+    "signUp": "Hesap Oluştur",
+    "noAccount": "Burada yeni misiniz?",
+    "hasAccount": "Hesabınız var mı?",
+    "createOne": "Hesap oluşturun",
+    "termsNote": "Devam ederek Şartlar ve Gizlilik Politikası'nı kabul etmiş olursunuz"
+  },
+  "Onboarding": {
+    "step": "{total}'den {current}. adım",
+    "dob": {
+      "title": "Ne zaman doğdunuz?",
+      "subtitle": "Size müzik önermek için kullanıyoruz",
+      "day": "Gün",
+      "month": "Ay",
+      "year": "Yıl"
+    },
+    "profile": {
+      "title": "Kendinizden bahsedin",
+      "subtitle": "Size nasıl seslenelim?",
+      "username": "Kullanıcı adı",
+      "fullName": "Tam adınız",
+      "avatar": "Avatar seçin",
+      "uploadAvatar": "Fotoğraf yükle"
+    },
+    "genres": {
+      "title": "Hangi müzik sizi etkiler?",
+      "subtitle": "Sevdiğiniz türleri seçin",
+      "minSelected": "En az 3 tane seçin"
+    },
+    "continue": "Devam",
+    "finish": "Bitir",
+    "back": "Geri"
+  },
+  "Home": {
+    "hi": "Tekrar hoş geldiniz",
+    "credits": "Bugün {count} kredi kaldı",
+    "promptPlaceholder": "Oluşturmak istediğiniz müziği tarif edin...",
+    "create": "Oluştur",
+    "exploreTitle": "Keşfet",
+    "exploreSubtitle": "Başkaları neler yaratıyor görün"
+  },
+  "Create": {
+    "title": "Oluştur",
+    "promptLabel": "İstem",
+    "promptPlaceholder": "Şarkınızı tanımlayın. Ruh hali, enstrümanlar, atmosfer...",
+    "lyricsLabel": "Sözler",
+    "lyricsPlaceholder": "[kıta]\nSözleri buraya yazın...\n[nakarat]\n...",
+    "lyricsHint": "AI'nin söz oluşturması için boş bırakın",
+    "instrumental": "Enstrümantal (vokalsiz)",
+    "voice": "Ses",
+    "voiceMan": "Erkek",
+    "voiceWoman": "Kadın",
+    "voiceInstrumental": "Enstrümantal",
+    "genres": "Türler",
+    "duration": "Süre",
+    "generate": "Oluştur",
+    "generating": "Şarkınız oluşturuluyor...",
+    "yourSongs": "Şarkılarınız",
+    "noSongs": "Henüz şarkı yok. İlkini oluşturun →"
+  },
+  "Song": {
+    "play": "Oynat",
+    "pause": "Duraklat",
+    "download": "İndir",
+    "publish": "Yayınla",
+    "unpublish": "Geri çek",
+    "edit": "Yeniden adlandır",
+    "delete": "Sil",
+    "details": "Ayrıntılar",
+    "prompt": "İstem",
+    "lyrics": "Sözler",
+    "genre": "Tür",
+    "private": "Özel",
+    "public": "Açık"
+  },
+  "Explore": {
+    "title": "Keşfet",
+    "subtitle": "Topluluk şarkıları",
+    "filterAll": "Tümü",
+    "trending": "Trendde",
+    "newest": "En Yeni",
+    "by": "yazan:",
+    "noSongs": "Şarkı yok. İlk siz olun!"
+  },
+  "Player": {
+    "noSong": "Çalan şarkı yok"
+  },
+  "Errors": {
+    "generic": "Bir şeyler yanlış gitti. Tekrar deneyin.",
+    "noCredits": "Bugünkü kredilerinizi kullandınız. Yarın gelin!",
+    "auth": "Lütfen önce giriş yapın"
+  },
+  "Languages": {
+    "en": "English",
+    "uz": "O'zbek",
+    "az": "Azərbaycan",
+    "tr": "Türkçe"
+  }
+}

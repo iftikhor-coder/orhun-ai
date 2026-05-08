@@ -1,0 +1,113 @@
+{
+  "Brand": {
+    "name": "Orhun AI",
+    "tagline": "musiqa"
+  },
+  "Login": {
+    "welcome": "Xush kelibsiz",
+    "subtitle": "Qadimgi qo'shiqlar yangi sadolar bilan uchrashadi",
+    "google": "Google bilan davom etish",
+    "or": "yoki",
+    "email": "Email",
+    "emailPlaceholder": "siz@example.com",
+    "password": "Parol",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Kirish",
+    "signUp": "Akkaunt yaratish",
+    "noAccount": "Yangimisiz?",
+    "hasAccount": "Akkauntingiz bormi?",
+    "createOne": "Akkaunt yarating",
+    "termsNote": "Davom etish bilan siz Shartlar va Maxfiylik siyosatiga rozisiz"
+  },
+  "Onboarding": {
+    "step": "{total}-bosqichdan {current}-si",
+    "dob": {
+      "title": "Qachon tug'ilgansiz?",
+      "subtitle": "Sizga moslashtirilgan musiqa tavsiya qilish uchun",
+      "day": "Kun",
+      "month": "Oy",
+      "year": "Yil"
+    },
+    "profile": {
+      "title": "O'zingiz haqingizda ayting",
+      "subtitle": "Sizni qanday chaqirsak bo'ladi?",
+      "username": "Username",
+      "fullName": "To'liq ism",
+      "avatar": "Avatar tanlang",
+      "uploadAvatar": "Rasm yuklash"
+    },
+    "genres": {
+      "title": "Qanday musiqa sizni hayajonlantiradi?",
+      "subtitle": "Yoqtirgan janrlaringizni tanlang",
+      "minSelected": "Kamida 3 tasini tanlang"
+    },
+    "continue": "Davom etish",
+    "finish": "Tugatish",
+    "back": "Orqaga"
+  },
+  "Home": {
+    "hi": "Qaytib kelganingiz bilan",
+    "credits": "Bugun {count} kredit qoldi",
+    "promptPlaceholder": "Yaratmoqchi bo'lgan musiqani tasvirlang...",
+    "create": "Yaratish",
+    "exploreTitle": "Kashf etish",
+    "exploreSubtitle": "Boshqalar nima yaratayotganini ko'ring"
+  },
+  "Create": {
+    "title": "Yaratish",
+    "promptLabel": "Promt",
+    "promptPlaceholder": "Qo'shig'ingizni tasvirlang. Kayfiyat, asboblar, ohang...",
+    "lyricsLabel": "Lirika",
+    "lyricsPlaceholder": "[band]\nLirikani shu yerga yozing...\n[xor]\n...",
+    "lyricsHint": "AI lirika yaratishi uchun bo'sh qoldiring",
+    "instrumental": "Instrumental (vokalsiz)",
+    "voice": "Ovoz",
+    "voiceMan": "Erkak",
+    "voiceWoman": "Ayol",
+    "voiceInstrumental": "Instrumental",
+    "genres": "Janrlar",
+    "duration": "Davomiyligi",
+    "generate": "Generet qilish",
+    "generating": "Qo'shig'ingiz yaratilmoqda...",
+    "yourSongs": "Sizning qo'shiqlaringiz",
+    "noSongs": "Hali qo'shiq yo'q. Birinchisini yarating →"
+  },
+  "Song": {
+    "play": "Ijro",
+    "pause": "To'xtatish",
+    "download": "Yuklab olish",
+    "publish": "Chiqarish",
+    "unpublish": "Qaytarish",
+    "edit": "Nomini o'zgartirish",
+    "delete": "O'chirish",
+    "details": "Tafsilotlar",
+    "prompt": "Promt",
+    "lyrics": "Lirika",
+    "genre": "Janr",
+    "private": "Shaxsiy",
+    "public": "Ommaviy"
+  },
+  "Explore": {
+    "title": "Kashf etish",
+    "subtitle": "Hamjamiyat qo'shiqlari",
+    "filterAll": "Hammasi",
+    "trending": "Trendda",
+    "newest": "Yangi",
+    "by": "muallif:",
+    "noSongs": "Qo'shiqlar yo'q. Birinchi bo'ling!"
+  },
+  "Player": {
+    "noSong": "Hech narsa ijro etilmayapti"
+  },
+  "Errors": {
+    "generic": "Nimadir noto'g'ri ketdi. Qayta urinib ko'ring.",
+    "noCredits": "Bugungi kreditlaringizni ishlatib bo'ldingiz. Ertaga qayting!",
+    "auth": "Avval tizimga kiring"
+  },
+  "Languages": {
+    "en": "English",
+    "uz": "O'zbek",
+    "az": "Azərbaycan",
+    "tr": "Türkçe"
+  }
+}

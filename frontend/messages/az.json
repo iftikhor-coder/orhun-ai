@@ -1,0 +1,113 @@
+{
+  "Brand": {
+    "name": "Orhun AI",
+    "tagline": "musiqi"
+  },
+  "Login": {
+    "welcome": "Xoş gəlmisiniz",
+    "subtitle": "Qədim mahnılar yeni səslərlə görüşür",
+    "google": "Google ilə davam et",
+    "or": "və ya",
+    "email": "Email",
+    "emailPlaceholder": "siz@example.com",
+    "password": "Parol",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Daxil ol",
+    "signUp": "Hesab yarat",
+    "noAccount": "Burada yenisiniz?",
+    "hasAccount": "Artıq hesabınız var?",
+    "createOne": "Hesab yaradın",
+    "termsNote": "Davam etməklə Şərtlər və Məxfilik Siyasəti ilə razılaşırsınız"
+  },
+  "Onboarding": {
+    "step": "{total}-dən {current}-ci addım",
+    "dob": {
+      "title": "Nə vaxt doğulmusunuz?",
+      "subtitle": "Sizə musiqi tövsiyə etmək üçün istifadə edirik",
+      "day": "Gün",
+      "month": "Ay",
+      "year": "İl"
+    },
+    "profile": {
+      "title": "Özünüz haqqında danışın",
+      "subtitle": "Sizi necə çağıraq?",
+      "username": "İstifadəçi adı",
+      "fullName": "Tam ad",
+      "avatar": "Avatar seçin",
+      "uploadAvatar": "Şəkil yükləyin"
+    },
+    "genres": {
+      "title": "Hansı musiqi sizi həyəcanlandırır?",
+      "subtitle": "Sevdiyiniz janrları seçin",
+      "minSelected": "Ən azı 3 seçin"
+    },
+    "continue": "Davam et",
+    "finish": "Bitir",
+    "back": "Geri"
+  },
+  "Home": {
+    "hi": "Yenə xoş gəldiniz",
+    "credits": "Bu gün {count} kredit qaldı",
+    "promptPlaceholder": "Yaratmaq istədiyiniz musiqini təsvir edin...",
+    "create": "Yarat",
+    "exploreTitle": "Kəşf et",
+    "exploreSubtitle": "Başqalarının nə yaratdığını görün"
+  },
+  "Create": {
+    "title": "Yarat",
+    "promptLabel": "Sorğu",
+    "promptPlaceholder": "Mahnınızı təsvir edin. Əhval-ruhiyyə, alətlər, hisslər...",
+    "lyricsLabel": "Sözlər",
+    "lyricsPlaceholder": "[bənd]\nSözləri buraya yazın...\n[xor]\n...",
+    "lyricsHint": "AI-nin söz yaratması üçün boş buraxın",
+    "instrumental": "İnstrumental (vokalsız)",
+    "voice": "Səs",
+    "voiceMan": "Kişi",
+    "voiceWoman": "Qadın",
+    "voiceInstrumental": "İnstrumental",
+    "genres": "Janrlar",
+    "duration": "Müddət",
+    "generate": "Yarat",
+    "generating": "Mahnınız yaradılır...",
+    "yourSongs": "Mahnılarınız",
+    "noSongs": "Hələ mahnı yoxdur. İlkini yaradın →"
+  },
+  "Song": {
+    "play": "Oxut",
+    "pause": "Dayandır",
+    "download": "Yüklə",
+    "publish": "Yayımla",
+    "unpublish": "Geri al",
+    "edit": "Adı dəyiş",
+    "delete": "Sil",
+    "details": "Təfərrüatlar",
+    "prompt": "Sorğu",
+    "lyrics": "Sözlər",
+    "genre": "Janr",
+    "private": "Şəxsi",
+    "public": "Açıq"
+  },
+  "Explore": {
+    "title": "Kəşf et",
+    "subtitle": "İcma mahnıları",
+    "filterAll": "Hamısı",
+    "trending": "Trenddə",
+    "newest": "Ən yeni",
+    "by": "müəllif:",
+    "noSongs": "Mahnı yoxdur. İlk olun!"
+  },
+  "Player": {
+    "noSong": "Heç bir mahnı oxudulmur"
+  },
+  "Errors": {
+    "generic": "Nəsə səhv getdi. Yenidən cəhd edin.",
+    "noCredits": "Bu günkü kreditlərinizi istifadə etmisiniz. Sabah qayıdın!",
+    "auth": "Əvvəlcə daxil olun"
+  },
+  "Languages": {
+    "en": "English",
+    "uz": "O'zbek",
+    "az": "Azərbaycan",
+    "tr": "Türkçe"
+  }
+}

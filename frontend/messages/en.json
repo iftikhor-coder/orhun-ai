@@ -1,0 +1,113 @@
+{
+  "Brand": {
+    "name": "Orhun AI",
+    "tagline": "music"
+  },
+  "Login": {
+    "welcome": "Welcome",
+    "subtitle": "Where ancient songs meet new sounds",
+    "google": "Continue with Google",
+    "or": "or",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "noAccount": "New here?",
+    "hasAccount": "Already have an account?",
+    "createOne": "Create one",
+    "termsNote": "By continuing, you agree to our Terms and Privacy Policy"
+  },
+  "Onboarding": {
+    "step": "Step {current} of {total}",
+    "dob": {
+      "title": "When were you born?",
+      "subtitle": "We use this to recommend music for you",
+      "day": "Day",
+      "month": "Month",
+      "year": "Year"
+    },
+    "profile": {
+      "title": "Tell us about yourself",
+      "subtitle": "How should we call you?",
+      "username": "Username",
+      "fullName": "Full name",
+      "avatar": "Choose an avatar",
+      "uploadAvatar": "Upload photo"
+    },
+    "genres": {
+      "title": "What music moves you?",
+      "subtitle": "Pick a few genres you love",
+      "minSelected": "Choose at least 3"
+    },
+    "continue": "Continue",
+    "finish": "Finish",
+    "back": "Back"
+  },
+  "Home": {
+    "hi": "Welcome back",
+    "credits": "{count} credits left today",
+    "promptPlaceholder": "Describe the music you want to create...",
+    "create": "Create",
+    "exploreTitle": "Explore",
+    "exploreSubtitle": "Discover what others are creating"
+  },
+  "Create": {
+    "title": "Create",
+    "promptLabel": "Prompt",
+    "promptPlaceholder": "Describe your song. Mood, instruments, vibe...",
+    "lyricsLabel": "Lyrics",
+    "lyricsPlaceholder": "[verse]\nWrite your lyrics here...\n[chorus]\n...",
+    "lyricsHint": "Leave empty for AI-generated lyrics",
+    "instrumental": "Instrumental (no vocals)",
+    "voice": "Voice",
+    "voiceMan": "Man",
+    "voiceWoman": "Woman",
+    "voiceInstrumental": "Instrumental",
+    "genres": "Genres",
+    "duration": "Duration",
+    "generate": "Generate",
+    "generating": "Generating your song...",
+    "yourSongs": "Your Songs",
+    "noSongs": "No songs yet. Create your first one →"
+  },
+  "Song": {
+    "play": "Play",
+    "pause": "Pause",
+    "download": "Download",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "edit": "Rename",
+    "delete": "Delete",
+    "details": "Details",
+    "prompt": "Prompt",
+    "lyrics": "Lyrics",
+    "genre": "Genre",
+    "private": "Private",
+    "public": "Public"
+  },
+  "Explore": {
+    "title": "Explore",
+    "subtitle": "Songs from the community",
+    "filterAll": "All",
+    "trending": "Trending",
+    "newest": "Newest",
+    "by": "by",
+    "noSongs": "No songs to show. Be the first!"
+  },
+  "Player": {
+    "noSong": "No song playing"
+  },
+  "Errors": {
+    "generic": "Something went wrong. Please try again.",
+    "noCredits": "You've used all your credits today. Come back tomorrow!",
+    "auth": "Please sign in first"
+  },
+  "Languages": {
+    "en": "English",
+    "uz": "O'zbek",
+    "az": "Azərbaycan",
+    "tr": "Türkçe"
+  }
+}
