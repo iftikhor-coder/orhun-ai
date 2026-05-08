@@ -5,6 +5,8 @@ import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n/request';
 
+export const dynamic = 'force-dynamic';
+
 const display = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
