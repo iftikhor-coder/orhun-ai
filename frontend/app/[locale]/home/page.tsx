@@ -1,55 +1,167 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { Music, Sparkles } from 'lucide-react';
-import { Logo } from '@/components/logo';
-import { LanguageSwitcher } from '@/components/language-switcher';
+import { useEffect, useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { Sparkles, ArrowRight, TrendingUp } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+import { Sidebar } from '@/components/sidebar';
+import { TopBar } from '@/components/topbar';
+import { SongCard } from '@/components/song-card';
+import { Song } from '@/lib/store/player';
+import { getTimeOfDay, cn } from '@/lib/utils';
 
 export default function HomePage() {
   const t = useTranslations('Home');
+  const locale = useLocale();
+  const router = useRouter();
+  const [prompt, setPrompt] = useState('');
+  const [user, setUser] = useState<any>(null);
+  const [mySongs, setMySongs] = useState<Song[]>([]);
+  const [exploreSongs, setExploreSongs] = useState<Song[]>([]);
+
+  const timeOfDay = getTimeOfDay();
+  const greeting = timeOfDay === 'morning' ? t('greetingMorning') : timeOfDay === 'day' ? t('greetingDay') : t('greetingEvening');
+
+  useEffect(() => {
+    const load = async () => {
+      const supabase = createClient();
+      const { data: { user: u } } = await supabase.auth.getUser();
+      setUser(u);
+
+      if (u) {
+        // Load my recent songs (max 4)
+        const { data: my } = await supabase
+          .from('songs')
+          .select('*')
+          .eq('user_id', u.id)
+          .eq('is_ready', true)
+          .order('created_at', { ascending: false })
+          .limit(4);
+        if (my) setMySongs(my as Song[]);
+
+        // Load published songs from community
+        const { data: pub } = await supabase
+          .from('songs')
+          .select('*')
+          .eq('is_published', true)
+          .eq('is_ready', true)
+          .order('created_at', { ascending: false })
+          .limit(6);
+        if (pub) setExploreSongs(pub as Song[]);
+      }
+    };
+    load();
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (prompt.trim().length < 3) return;
+    // Pass prompt to create page via query
+    router.push(`/${locale}/create?prompt=${encodeURIComponent(prompt)}`);
+  };
+
+  const userName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || '';
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 bg-gradient-midnight" />
-      <div className="fixed inset-0 orhun-pattern" />
+    <div className="flex min-h-screen relative">
+      <div className="fixed inset-0 bg-gradient-midnight -z-10" />
+      <div className="fixed inset-0 orhun-pattern -z-10" />
 
-      <header className="relative z-10 flex items-center justify-between px-6 sm:px-10 py-6">
-        <Logo size="md" />
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gold-300/70 hidden sm:inline">
-            {t('credits', { count: 4 })}
-          </span>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <Sidebar />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-12">
-        <div className="text-center mb-12 animate-fade-in-up">
-          <h1 className="font-display text-5xl text-gold-100 mb-3">{t('hi')}</h1>
-          <p className="text-gold-300/60">Coming in Hafta 3 — full experience</p>
-        </div>
+      <main className="flex-1 min-w-0 pb-32">
+        <TopBar />
 
-        <div className="surface-glass-bright rounded-2xl p-8 mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Sparkles className="h-5 w-5 text-gold-300" />
-            <h2 className="font-display text-2xl text-gold-100">{t('create')}</h2>
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8 lg:py-12">
+          {/* Greeting */}
+          <div className="mb-10 animate-fade-in-up">
+            <h1 className="font-display text-4xl sm:text-5xl font-light text-gold-100 mb-2">
+              {greeting}{userName && `, ${userName}`}
+            </h1>
+            <p className="text-gold-300/60 text-base sm:text-lg">{t('promptHint')}</p>
           </div>
-          <input
-            type="text"
-            placeholder={t('promptPlaceholder')}
-            className="w-full px-5 py-4 rounded-xl bg-midnight-800/50 border border-gold-900/30 text-gold-100 placeholder:text-gold-700/60 focus:outline-none focus:border-gold-600/50 transition-colors"
-          />
-        </div>
 
-        <div className="surface-glass rounded-2xl p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Music className="h-5 w-5 text-gold-300" />
-            <h2 className="font-display text-2xl text-gold-100">{t('exploreTitle')}</h2>
-          </div>
-          <p className="text-gold-300/60 text-sm">{t('exploreSubtitle')}</p>
-          <p className="text-gold-700 text-sm mt-4 italic">Songs from community will appear here</p>
+          {/* Main create input */}
+          <form onSubmit={handleSubmit} className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <div className="relative">
+              <div className="absolute -inset-0.5 bg-gradient-gold rounded-2xl opacity-30 blur" />
+              <div className="relative surface-glass-bright rounded-2xl p-2 flex items-center gap-2">
+                <div className="pl-4">
+                  <Sparkles className="h-5 w-5 text-gold-400" />
+                </div>
+                <input
+                  type="text"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  placeholder={t('promptPlaceholder')}
+                  className="flex-1 bg-transparent text-gold-100 placeholder:text-gold-700/60 px-2 py-3 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={prompt.trim().length < 3}
+                  className={cn(
+                    'flex items-center gap-2 px-5 py-3 rounded-xl',
+                    'bg-gradient-gold text-midnight-950 font-semibold text-sm',
+                    'hover:scale-105 active:scale-95 transition-transform',
+                    'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100'
+                  )}
+                >
+                  {t('createBtn')}
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </form>
+
+          {/* My library preview */}
+          {mySongs.length > 0 && (
+            <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-display text-2xl text-gold-100">{t('myLibrary')}</h2>
+                <button
+                  onClick={() => router.push(`/${locale}/create`)}
+                  className="text-sm text-gold-300/70 hover:text-gold-200 flex items-center gap-1"
+                >
+                  {t('viewAll')} <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {mySongs.map(song => <SongCard key={song.id} song={song} />)}
+              </div>
+            </section>
+          )}
+
+          {/* Explore */}
+          <section className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="font-display text-2xl text-gold-100 flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-gold-400" />
+                  {t('exploreTitle')}
+                </h2>
+                <p className="text-sm text-gold-300/60 mt-1">{t('exploreSubtitle')}</p>
+              </div>
+              <button
+                onClick={() => router.push(`/${locale}/explore`)}
+                className="text-sm text-gold-300/70 hover:text-gold-200 flex items-center gap-1"
+              >
+                {t('viewAll')} <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+
+            {exploreSongs.length > 0 ? (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {exploreSongs.map(song => <SongCard key={song.id} song={song} showMenu={false} />)}
+              </div>
+            ) : (
+              <div className="surface-card rounded-xl p-12 text-center">
+                <p className="text-gold-700 italic">{t('noSongsYet')}</p>
+              </div>
+            )}
+          </section>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }

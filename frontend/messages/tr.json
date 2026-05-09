@@ -1,7 +1,10 @@
 {
-  "Brand": {
-    "name": "Orhun AI",
-    "tagline": "müzik"
+  "Brand": { "name": "Orhun AI", "tagline": "müzik" },
+  "Nav": {
+    "home": "Ana sayfa",
+    "create": "Oluştur",
+    "explore": "Keşfet",
+    "library": "Kütüphanem"
   },
   "Login": {
     "welcome": "Hoş geldiniz",
@@ -26,66 +29,94 @@
       "subtitle": "Size müzik önermek için kullanıyoruz",
       "day": "Gün",
       "month": "Ay",
-      "year": "Yıl"
+      "year": "Yıl",
+      "months": ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"]
     },
     "profile": {
       "title": "Kendinizden bahsedin",
       "subtitle": "Size nasıl seslenelim?",
       "username": "Kullanıcı adı",
+      "usernamePlaceholder": "kullanici_adi",
       "fullName": "Tam adınız",
-      "avatar": "Avatar seçin",
-      "uploadAvatar": "Fotoğraf yükle"
+      "fullNamePlaceholder": "Adınız ve soyadınız",
+      "avatar": "Profil resmi",
+      "uploadAvatar": "Fotoğraf yükle",
+      "changeAvatar": "Fotoğrafı değiştir"
     },
     "genres": {
       "title": "Hangi müzik sizi etkiler?",
-      "subtitle": "Sevdiğiniz türleri seçin",
-      "minSelected": "En az 3 tane seçin"
+      "subtitle": "En az 3 tür seçin",
+      "minSelected": "En az 3 seçin ({count} seçildi)"
     },
     "continue": "Devam",
-    "finish": "Bitir",
+    "finish": "Başla",
     "back": "Geri"
   },
   "Home": {
-    "hi": "Tekrar hoş geldiniz",
-    "credits": "Bugün {count} kredi kaldı",
-    "promptPlaceholder": "Oluşturmak istediğiniz müziği tarif edin...",
-    "create": "Oluştur",
-    "exploreTitle": "Keşfet",
-    "exploreSubtitle": "Başkaları neler yaratıyor görün"
+    "greetingMorning": "Günaydın",
+    "greetingDay": "İyi günler",
+    "greetingEvening": "İyi akşamlar",
+    "promptHint": "Bugün ne tür bir müzik oluşturmak istersiniz?",
+    "promptPlaceholder": "Şarkı fikrinizi tarif edin...",
+    "createBtn": "Oluştur",
+    "credits": "{count} kredi kaldı",
+    "creditsResetTime": "{hours} saat sonra yenilenir",
+    "exploreTitle": "Toplulukta trendde",
+    "exploreSubtitle": "Başkalarının oluşturduklarını dinleyin",
+    "myLibrary": "Son şarkılarınız",
+    "noSongsYet": "Şarkılarınız burada görünecek",
+    "viewAll": "Tümünü gör"
   },
   "Create": {
     "title": "Oluştur",
-    "promptLabel": "İstem",
+    "subtitle": "Müziğinizi hayata geçirin",
+    "promptLabel": "Şarkı tanımı",
     "promptPlaceholder": "Şarkınızı tanımlayın. Ruh hali, enstrümanlar, atmosfer...",
     "lyricsLabel": "Sözler",
     "lyricsPlaceholder": "[kıta]\nSözleri buraya yazın...\n[nakarat]\n...",
     "lyricsHint": "AI'nin söz oluşturması için boş bırakın",
+    "lyricsAutoBtn": "AI ile oluştur",
     "instrumental": "Enstrümantal (vokalsiz)",
     "voice": "Ses",
     "voiceMan": "Erkek",
     "voiceWoman": "Kadın",
     "voiceInstrumental": "Enstrümantal",
     "genres": "Türler",
+    "genresHint": "En fazla 3 seçin",
     "duration": "Süre",
+    "durationShort": "Kısa (60s)",
+    "durationMedium": "Orta (120s)",
+    "durationLong": "Uzun (240s)",
     "generate": "Oluştur",
     "generating": "Şarkınız oluşturuluyor...",
+    "generatingHint": "Genellikle 30-60 saniye sürer",
     "yourSongs": "Şarkılarınız",
-    "noSongs": "Henüz şarkı yok. İlkini oluşturun →"
+    "noSongs": "Henüz şarkı yok",
+    "noSongsHint": "Oluşturduğunuz şarkılar burada görünecek",
+    "creditsRequired": "1 kredi kullanır",
+    "noCredits": "Krediler bitti",
+    "noCreditsHint": "Yarın 4 yeni kredi ile dönün"
   },
   "Song": {
     "play": "Oynat",
     "pause": "Duraklat",
     "download": "İndir",
     "publish": "Yayınla",
-    "unpublish": "Geri çek",
+    "unpublish": "Özel yap",
     "edit": "Yeniden adlandır",
     "delete": "Sil",
     "details": "Ayrıntılar",
     "prompt": "İstem",
     "lyrics": "Sözler",
     "genre": "Tür",
+    "voice": "Ses",
+    "duration": "Süre",
+    "createdOn": "Oluşturuldu",
     "private": "Özel",
-    "public": "Açık"
+    "public": "Açık",
+    "renameTitle": "Şarkıyı yeniden adlandır",
+    "deleteConfirm": "Bu şarkıyı silmek istiyor musunuz?",
+    "deleteConfirmHint": "Bu işlem geri alınamaz"
   },
   "Explore": {
     "title": "Keşfet",
@@ -94,20 +125,51 @@
     "trending": "Trendde",
     "newest": "En Yeni",
     "by": "yazan:",
-    "noSongs": "Şarkı yok. İlk siz olun!"
+    "noSongs": "Şarkı yok. İlk siz olun!",
+    "likes": "{count} beğeni",
+    "comments": "{count} yorum"
   },
   "Player": {
-    "noSong": "Çalan şarkı yok"
+    "noSong": "Çalmak için bir şarkı seçin",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "shuffle": "Karıştır",
+    "repeat": "Tekrarla",
+    "volume": "Ses"
   },
   "Errors": {
     "generic": "Bir şeyler yanlış gitti. Tekrar deneyin.",
-    "noCredits": "Bugünkü kredilerinizi kullandınız. Yarın gelin!",
-    "auth": "Lütfen önce giriş yapın"
+    "noCredits": "Bugünkü kredilerinizi kullandınız",
+    "auth": "Lütfen önce giriş yapın",
+    "network": "Bağlantı sorunu. İnternetinizi kontrol edin.",
+    "promptTooShort": "Açıklama en az 3 karakter olmalıdır",
+    "selectGenres": "Lütfen en az 1 tür seçin"
   },
   "Languages": {
     "en": "English",
     "uz": "O'zbek",
     "az": "Azərbaycan",
     "tr": "Türkçe"
+  },
+  "Genres": {
+    "pop": "Pop",
+    "rock": "Rock",
+    "hiphop": "Hip-Hop",
+    "electronic": "Elektronik",
+    "jazz": "Caz",
+    "classical": "Klasik",
+    "rnb": "R&B",
+    "country": "Country",
+    "folk": "Halk",
+    "metal": "Metal",
+    "reggae": "Reggae",
+    "blues": "Blues",
+    "lofi": "Lo-fi",
+    "ambient": "Ambient",
+    "disco": "Disko",
+    "funk": "Funk",
+    "house": "House",
+    "techno": "Tekno",
+    "indie": "Indie"
   }
 }

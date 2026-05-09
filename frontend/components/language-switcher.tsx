@@ -23,9 +23,7 @@ export function LanguageSwitcher() {
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
@@ -45,33 +43,29 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen(!open)}
         className={cn(
-          'flex items-center gap-2 px-3 py-2 rounded-lg',
-          'text-sm text-gold-200 hover:text-gold-100',
+          'flex items-center gap-2 px-3 py-2 rounded-lg text-sm',
+          'text-gold-200 hover:text-gold-100',
           'border border-gold-900/40 hover:border-gold-700/60',
           'bg-midnight-700/40 hover:bg-midnight-600/60',
           'transition-all duration-200'
         )}
       >
         <Globe className="h-4 w-4" />
-        <span className="font-medium">{current?.flag}</span>
+        <span>{current?.flag}</span>
         <span className="hidden sm:inline">{t(locale)}</span>
       </button>
 
       {open && (
-        <div
-          className={cn(
-            'absolute top-full right-0 mt-2 w-48 py-2 rounded-xl z-50',
-            'surface-glass-bright',
-            'animate-fade-in shadow-2xl shadow-black/50'
-          )}
-        >
+        <div className={cn(
+          'absolute top-full right-0 mt-2 w-48 py-2 rounded-xl z-50',
+          'surface-glass-bright animate-fade-in shadow-2xl shadow-black/50'
+        )}>
           {LANGUAGES.map((lang) => (
             <button
               key={lang.code}
               onClick={() => switchLocale(lang.code)}
               className={cn(
-                'w-full flex items-center justify-between px-4 py-2.5',
-                'text-sm transition-colors',
+                'w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors',
                 lang.code === locale
                   ? 'text-gold-300'
                   : 'text-gold-100/70 hover:text-gold-100 hover:bg-midnight-600/40'

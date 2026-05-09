@@ -1,7 +1,10 @@
 {
-  "Brand": {
-    "name": "Orhun AI",
-    "tagline": "music"
+  "Brand": { "name": "Orhun AI", "tagline": "music" },
+  "Nav": {
+    "home": "Home",
+    "create": "Create",
+    "explore": "Explore",
+    "library": "Library"
   },
   "Login": {
     "welcome": "Welcome",
@@ -26,66 +29,94 @@
       "subtitle": "We use this to recommend music for you",
       "day": "Day",
       "month": "Month",
-      "year": "Year"
+      "year": "Year",
+      "months": ["January","February","March","April","May","June","July","August","September","October","November","December"]
     },
     "profile": {
       "title": "Tell us about yourself",
       "subtitle": "How should we call you?",
       "username": "Username",
+      "usernamePlaceholder": "your_username",
       "fullName": "Full name",
-      "avatar": "Choose an avatar",
-      "uploadAvatar": "Upload photo"
+      "fullNamePlaceholder": "Your full name",
+      "avatar": "Profile picture",
+      "uploadAvatar": "Upload photo",
+      "changeAvatar": "Change photo"
     },
     "genres": {
       "title": "What music moves you?",
-      "subtitle": "Pick a few genres you love",
-      "minSelected": "Choose at least 3"
+      "subtitle": "Pick at least 3 genres you love",
+      "minSelected": "Choose at least 3 ({count} selected)"
     },
     "continue": "Continue",
-    "finish": "Finish",
+    "finish": "Get Started",
     "back": "Back"
   },
   "Home": {
-    "hi": "Welcome back",
-    "credits": "{count} credits left today",
-    "promptPlaceholder": "Describe the music you want to create...",
-    "create": "Create",
-    "exploreTitle": "Explore",
-    "exploreSubtitle": "Discover what others are creating"
+    "greetingMorning": "Good morning",
+    "greetingDay": "Good afternoon",
+    "greetingEvening": "Good evening",
+    "promptHint": "What kind of music do you want to create today?",
+    "promptPlaceholder": "Describe your song idea...",
+    "createBtn": "Create",
+    "credits": "{count} credits left",
+    "creditsResetTime": "Resets in {hours}h",
+    "exploreTitle": "Trending in the community",
+    "exploreSubtitle": "Listen to what others are creating",
+    "myLibrary": "Your latest songs",
+    "noSongsYet": "Your songs will appear here",
+    "viewAll": "View all"
   },
   "Create": {
     "title": "Create",
-    "promptLabel": "Prompt",
+    "subtitle": "Bring your music to life",
+    "promptLabel": "Song description",
     "promptPlaceholder": "Describe your song. Mood, instruments, vibe...",
     "lyricsLabel": "Lyrics",
     "lyricsPlaceholder": "[verse]\nWrite your lyrics here...\n[chorus]\n...",
     "lyricsHint": "Leave empty for AI-generated lyrics",
+    "lyricsAutoBtn": "Generate with AI",
     "instrumental": "Instrumental (no vocals)",
     "voice": "Voice",
-    "voiceMan": "Man",
-    "voiceWoman": "Woman",
+    "voiceMan": "Male",
+    "voiceWoman": "Female",
     "voiceInstrumental": "Instrumental",
     "genres": "Genres",
+    "genresHint": "Select up to 3",
     "duration": "Duration",
+    "durationShort": "Short (60s)",
+    "durationMedium": "Medium (120s)",
+    "durationLong": "Long (240s)",
     "generate": "Generate",
-    "generating": "Generating your song...",
+    "generating": "Composing your song...",
+    "generatingHint": "This usually takes 30-60 seconds",
     "yourSongs": "Your Songs",
-    "noSongs": "No songs yet. Create your first one →"
+    "noSongs": "No songs yet",
+    "noSongsHint": "Your generated songs will appear here",
+    "creditsRequired": "Uses 1 credit",
+    "noCredits": "Out of credits",
+    "noCreditsHint": "Come back tomorrow for 4 fresh credits"
   },
   "Song": {
     "play": "Play",
     "pause": "Pause",
     "download": "Download",
     "publish": "Publish",
-    "unpublish": "Unpublish",
+    "unpublish": "Make private",
     "edit": "Rename",
     "delete": "Delete",
     "details": "Details",
     "prompt": "Prompt",
     "lyrics": "Lyrics",
     "genre": "Genre",
+    "voice": "Voice",
+    "duration": "Duration",
+    "createdOn": "Created",
     "private": "Private",
-    "public": "Public"
+    "public": "Public",
+    "renameTitle": "Rename song",
+    "deleteConfirm": "Delete this song?",
+    "deleteConfirmHint": "This action cannot be undone"
   },
   "Explore": {
     "title": "Explore",
@@ -94,20 +125,51 @@
     "trending": "Trending",
     "newest": "Newest",
     "by": "by",
-    "noSongs": "No songs to show. Be the first!"
+    "noSongs": "No songs to show. Be the first!",
+    "likes": "{count} likes",
+    "comments": "{count} comments"
   },
   "Player": {
-    "noSong": "No song playing"
+    "noSong": "Select a song to play",
+    "previous": "Previous",
+    "next": "Next",
+    "shuffle": "Shuffle",
+    "repeat": "Repeat",
+    "volume": "Volume"
   },
   "Errors": {
     "generic": "Something went wrong. Please try again.",
-    "noCredits": "You've used all your credits today. Come back tomorrow!",
-    "auth": "Please sign in first"
+    "noCredits": "You've used all your credits today",
+    "auth": "Please sign in first",
+    "network": "Connection problem. Check your internet.",
+    "promptTooShort": "Description must be at least 3 characters",
+    "selectGenres": "Please select at least 1 genre"
   },
   "Languages": {
     "en": "English",
     "uz": "O'zbek",
     "az": "Azərbaycan",
     "tr": "Türkçe"
+  },
+  "Genres": {
+    "pop": "Pop",
+    "rock": "Rock",
+    "hiphop": "Hip-Hop",
+    "electronic": "Electronic",
+    "jazz": "Jazz",
+    "classical": "Classical",
+    "rnb": "R&B",
+    "country": "Country",
+    "folk": "Folk",
+    "metal": "Metal",
+    "reggae": "Reggae",
+    "blues": "Blues",
+    "lofi": "Lo-fi",
+    "ambient": "Ambient",
+    "disco": "Disco",
+    "funk": "Funk",
+    "house": "House",
+    "techno": "Techno",
+    "indie": "Indie"
   }
 }

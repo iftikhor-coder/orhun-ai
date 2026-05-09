@@ -1,6 +1,6 @@
 {
   "name": "orhun-ai-frontend",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,6 +12,7 @@
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.45.4",
     "clsx": "^2.1.1",
+    "howler": "^2.2.4",
     "lucide-react": "^0.453.0",
     "next": "14.2.18",
     "next-intl": "^3.21.1",
@@ -21,6 +22,7 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@types/howler": "^2.2.12",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",

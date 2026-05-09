@@ -1,7 +1,10 @@
 {
-  "Brand": {
-    "name": "Orhun AI",
-    "tagline": "musiqa"
+  "Brand": { "name": "Orhun AI", "tagline": "musiqa" },
+  "Nav": {
+    "home": "Bosh sahifa",
+    "create": "Yaratish",
+    "explore": "Kashf etish",
+    "library": "Kutubxonam"
   },
   "Login": {
     "welcome": "Xush kelibsiz",
@@ -26,66 +29,94 @@
       "subtitle": "Sizga moslashtirilgan musiqa tavsiya qilish uchun",
       "day": "Kun",
       "month": "Oy",
-      "year": "Yil"
+      "year": "Yil",
+      "months": ["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"]
     },
     "profile": {
       "title": "O'zingiz haqingizda ayting",
       "subtitle": "Sizni qanday chaqirsak bo'ladi?",
       "username": "Username",
+      "usernamePlaceholder": "user_nomingiz",
       "fullName": "To'liq ism",
-      "avatar": "Avatar tanlang",
-      "uploadAvatar": "Rasm yuklash"
+      "fullNamePlaceholder": "Ismingiz va familyangiz",
+      "avatar": "Profil rasmi",
+      "uploadAvatar": "Rasm yuklash",
+      "changeAvatar": "Rasmni o'zgartirish"
     },
     "genres": {
       "title": "Qanday musiqa sizni hayajonlantiradi?",
-      "subtitle": "Yoqtirgan janrlaringizni tanlang",
-      "minSelected": "Kamida 3 tasini tanlang"
+      "subtitle": "Kamida 3 ta janrni tanlang",
+      "minSelected": "Kamida 3 ta tanlang ({count} ta tanlangan)"
     },
     "continue": "Davom etish",
-    "finish": "Tugatish",
+    "finish": "Boshlash",
     "back": "Orqaga"
   },
   "Home": {
-    "hi": "Qaytib kelganingiz bilan",
-    "credits": "Bugun {count} kredit qoldi",
-    "promptPlaceholder": "Yaratmoqchi bo'lgan musiqani tasvirlang...",
-    "create": "Yaratish",
-    "exploreTitle": "Kashf etish",
-    "exploreSubtitle": "Boshqalar nima yaratayotganini ko'ring"
+    "greetingMorning": "Xayrli tong",
+    "greetingDay": "Xayrli kun",
+    "greetingEvening": "Xayrli kech",
+    "promptHint": "Bugun qanday musiqa yaratmoqchisiz?",
+    "promptPlaceholder": "Qo'shiq haqida g'oyangizni yozing...",
+    "createBtn": "Yaratish",
+    "credits": "{count} kredit qoldi",
+    "creditsResetTime": "{hours} soatdan keyin yangilanadi",
+    "exploreTitle": "Hamjamiyatda mashhur",
+    "exploreSubtitle": "Boshqalar nima yaratayotganini tinglang",
+    "myLibrary": "Sizning so'nggi qo'shiqlaringiz",
+    "noSongsYet": "Qo'shiqlaringiz shu yerda paydo bo'ladi",
+    "viewAll": "Barchasini ko'rish"
   },
   "Create": {
     "title": "Yaratish",
-    "promptLabel": "Promt",
+    "subtitle": "Musiqangizni hayotga olib keling",
+    "promptLabel": "Qo'shiq tavsifi",
     "promptPlaceholder": "Qo'shig'ingizni tasvirlang. Kayfiyat, asboblar, ohang...",
     "lyricsLabel": "Lirika",
     "lyricsPlaceholder": "[band]\nLirikani shu yerga yozing...\n[xor]\n...",
     "lyricsHint": "AI lirika yaratishi uchun bo'sh qoldiring",
+    "lyricsAutoBtn": "AI bilan yaratish",
     "instrumental": "Instrumental (vokalsiz)",
     "voice": "Ovoz",
     "voiceMan": "Erkak",
     "voiceWoman": "Ayol",
     "voiceInstrumental": "Instrumental",
     "genres": "Janrlar",
+    "genresHint": "3 tagacha tanlang",
     "duration": "Davomiyligi",
+    "durationShort": "Qisqa (60s)",
+    "durationMedium": "O'rtacha (120s)",
+    "durationLong": "Uzun (240s)",
     "generate": "Generet qilish",
     "generating": "Qo'shig'ingiz yaratilmoqda...",
+    "generatingHint": "Odatda 30-60 sekund vaqt oladi",
     "yourSongs": "Sizning qo'shiqlaringiz",
-    "noSongs": "Hali qo'shiq yo'q. Birinchisini yarating →"
+    "noSongs": "Hali qo'shiq yo'q",
+    "noSongsHint": "Yaratgan qo'shiqlaringiz shu yerda paydo bo'ladi",
+    "creditsRequired": "1 kredit ishlatadi",
+    "noCredits": "Kreditlar tugadi",
+    "noCreditsHint": "Ertaga yana 4 ta kredit bilan qayting"
   },
   "Song": {
     "play": "Ijro",
     "pause": "To'xtatish",
     "download": "Yuklab olish",
     "publish": "Chiqarish",
-    "unpublish": "Qaytarish",
+    "unpublish": "Shaxsiy qilish",
     "edit": "Nomini o'zgartirish",
     "delete": "O'chirish",
     "details": "Tafsilotlar",
     "prompt": "Promt",
     "lyrics": "Lirika",
     "genre": "Janr",
+    "voice": "Ovoz",
+    "duration": "Davomiyligi",
+    "createdOn": "Yaratilgan",
     "private": "Shaxsiy",
-    "public": "Ommaviy"
+    "public": "Ommaviy",
+    "renameTitle": "Qo'shiq nomini o'zgartirish",
+    "deleteConfirm": "Bu qo'shiqni o'chirasizmi?",
+    "deleteConfirmHint": "Bu amalni qaytarib bo'lmaydi"
   },
   "Explore": {
     "title": "Kashf etish",
@@ -94,20 +125,51 @@
     "trending": "Trendda",
     "newest": "Yangi",
     "by": "muallif:",
-    "noSongs": "Qo'shiqlar yo'q. Birinchi bo'ling!"
+    "noSongs": "Qo'shiqlar yo'q. Birinchi bo'ling!",
+    "likes": "{count} like",
+    "comments": "{count} izoh"
   },
   "Player": {
-    "noSong": "Hech narsa ijro etilmayapti"
+    "noSong": "Tinglash uchun qo'shiq tanlang",
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "shuffle": "Aralashtirish",
+    "repeat": "Takrorlash",
+    "volume": "Ovoz balandligi"
   },
   "Errors": {
     "generic": "Nimadir noto'g'ri ketdi. Qayta urinib ko'ring.",
-    "noCredits": "Bugungi kreditlaringizni ishlatib bo'ldingiz. Ertaga qayting!",
-    "auth": "Avval tizimga kiring"
+    "noCredits": "Bugungi kreditlaringizni ishlatib bo'ldingiz",
+    "auth": "Avval tizimga kiring",
+    "network": "Aloqa muammosi. Internetni tekshiring.",
+    "promptTooShort": "Tavsif kamida 3 belgidan iborat bo'lishi kerak",
+    "selectGenres": "Iltimos, kamida 1 ta janrni tanlang"
   },
   "Languages": {
     "en": "English",
     "uz": "O'zbek",
     "az": "Azərbaycan",
     "tr": "Türkçe"
+  },
+  "Genres": {
+    "pop": "Pop",
+    "rock": "Rok",
+    "hiphop": "Hip-Hop",
+    "electronic": "Elektron",
+    "jazz": "Jaz",
+    "classical": "Klassika",
+    "rnb": "R&B",
+    "country": "Kantri",
+    "folk": "Xalq",
+    "metal": "Metal",
+    "reggae": "Regge",
+    "blues": "Blyuz",
+    "lofi": "Lo-fi",
+    "ambient": "Ambient",
+    "disco": "Disko",
+    "funk": "Fank",
+    "house": "House",
+    "techno": "Texno",
+    "indie": "Indi"
   }
 }

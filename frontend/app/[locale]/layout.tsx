@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n/request';
+import { AudioPlayer } from '@/components/player/audio-player';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,8 +24,7 @@ const sans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: 'Orhun AI — Where ancient songs meet new sounds',
-  description:
-    'Generate music with AI. Create songs in seconds with a stroke of inspiration.',
+  description: 'Generate music with AI in seconds. Inspired by ancient Turkic sounds.',
   metadataBase: new URL('https://orhun-ai.vercel.app'),
   openGraph: {
     title: 'Orhun AI',
@@ -60,6 +60,7 @@ export default async function LocaleLayout({
       <body className="min-h-screen">
         <NextIntlClientProvider messages={messages}>
           {children}
+          <AudioPlayer />
         </NextIntlClientProvider>
       </body>
     </html>
