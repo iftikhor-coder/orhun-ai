@@ -22,7 +22,9 @@ export default function ExplorePage() {
       let query = supabase
         .from('songs')
         .select('*')
-        .eq('is_published', true);
+        .eq('is_published', true)
+        .eq('is_ready', true)
+        .is('deleted_at', null);
 
       query = filter === 'trending'
         ? query.order('like_count', { ascending: false })

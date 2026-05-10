@@ -10,6 +10,7 @@ import { createClient } from '@/lib/supabase/client';
 import { Sidebar } from '@/components/sidebar';
 import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
+import { SongsPanel } from '@/components/songs-panel';
 import { GenrePill } from '@/components/genre-pill';
 import { Song, usePlayerStore } from '@/lib/store/player';
 import { generateSong, GenerateError, VoiceType } from '@/lib/api';
@@ -162,30 +163,19 @@ function CreateContent() {
         duration,
       });
 
-      // Update local state
+      // Update credits immediately
       setCredits(result.credits_remaining);
 
-      // Reload songs from DB to get fresh data
-      await reload();
-
-      // Auto-play
-      const playable: Song = {
-        id: result.song_id,
-        title: prompt.slice(0, 60),
-        prompt: result.prompt,
-        lyrics,
-        audio_url: result.audio_url,
-        duration_seconds: result.duration,
-        voice_type: voiceType,
-        is_published: false,
-        created_at: new Date().toISOString(),
-      };
-      setSong(playable);
+      // Notify SongsPanel to reload - placeholder row already in DB
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('orhun:songs-updated'));
+      }
 
       notify({
         type: 'success',
-        title: tn('successTitle'),
-        message: tn('successMessage', { credits: result.credits_remaining }),
+        title: tn('queuedTitle'),
+        message: tn('queuedMessage'),
+        duration: 5000,
       });
 
       // Clear form
@@ -399,44 +389,10 @@ function CreateContent() {
               )}
             </div>
 
-            {/* Right: songs list */}
+            {/* Right: songs list with Active/History tabs */}
             <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              <div className="surface-glass-bright rounded-2xl p-5 lg:sticky lg:top-24 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                <div className="flex items-center gap-2 mb-4">
-                  <Music className="h-5 w-5 text-gold-400" />
-                  <h2 className="font-display text-2xl text-gold-100">{t('yourSongs')}</h2>
-                  <span className="ml-auto text-xs text-gold-700">{mySongs.length}</span>
-                </div>
-
-                {generating && (
-                  <div className="surface-card rounded-xl p-4 mb-3 animate-pulse-gold border-gold-700/40">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-lg bg-gradient-gold-soft flex items-center justify-center">
-                        <Loader2 className="h-5 w-5 animate-spin text-gold-400" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm text-gold-200 font-medium animate-shimmer">
-                          {t('generating')}
-                        </div>
-                        <div className="text-xs text-gold-700 truncate">{prompt}</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {mySongs.length > 0 ? (
-                  <div className="space-y-2">
-                    {mySongs.map((song) => (
-                      <SongCard key={song.id} song={song} onUpdate={() => setRefreshTick((t) => t + 1)} />
-                    ))}
-                  </div>
-                ) : !generating ? (
-                  <div className="text-center py-12">
-                    <Sparkles className="h-8 w-8 text-gold-700 mx-auto mb-3" />
-                    <p className="text-gold-700 italic mb-1">{t('noSongs')}</p>
-                    <p className="text-xs text-gold-700/70">{t('noSongsHint')}</p>
-                  </div>
-                ) : null}
+              <div className="lg:sticky lg:top-24">
+                <SongsPanel className="surface-glass-bright" />
               </div>
             </div>
           </div>

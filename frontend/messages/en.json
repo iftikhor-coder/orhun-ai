@@ -134,7 +134,10 @@
     "voiceMale": "Male voice",
     "voiceFemale": "Female voice",
     "voiceInstrumental": "Instrumental",
-    "genres": "Genres"
+    "genres": "Genres",
+    "generating": "Generating",
+    "failed": "Failed",
+    "generatingHint": "Creating your music... (~3 min)"
   },
   "Notify": {
     "generatingTitle": "Generating your song...",
@@ -155,7 +158,9 @@
     "copyFailed": "Could not copy link",
     "copied": "Copied!",
     "updateFailed": "Update failed",
-    "deleteFailed": "Delete failed"
+    "deleteFailed": "Delete failed",
+    "queuedTitle": "Generation started",
+    "queuedMessage": "Your song is being created in the background. You can navigate away — it will appear when ready."
   },
   "Errors": {
     "promptTooShort": "Prompt is too short (min 3 characters)",
@@ -269,5 +274,20 @@
         "name": "Yearly"
       }
     }
+  },
+  "SongsPanel": {
+    "yourSongs": "Your Songs",
+    "active": "Active",
+    "history": "History",
+    "loading": "Loading...",
+    "noSongs": "No songs yet",
+    "noSongsHint": "Your generated songs will appear here",
+    "historyEmpty": "No deleted songs",
+    "historyEmptyHint": "Songs you delete will appear here for 15 days",
+    "restore": "Restore",
+    "autoDeleteIn": "Auto-deletes in {days} days",
+    "autoDeleteSoon": "Will be deleted soon",
+    "historyHint": "Deleted songs are kept for 15 days, then permanently removed",
+    "deleteForeverConfirm": "Permanently delete this song? This cannot be undone."
   }
 }

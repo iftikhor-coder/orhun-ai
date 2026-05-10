@@ -134,7 +134,10 @@
     "voiceMale": "Erkak ovoz",
     "voiceFemale": "Ayol ovoz",
     "voiceInstrumental": "Instrumental",
-    "genres": "Janrlar"
+    "genres": "Janrlar",
+    "generating": "Yaratilmoqda",
+    "failed": "Xato",
+    "generatingHint": "Musiqangiz yaratilmoqda... (~3 daq)"
   },
   "Notify": {
     "generatingTitle": "Qo'shig'ingiz yaratilyapti...",
@@ -155,7 +158,9 @@
     "copyFailed": "Linkni nusxalab bo'lmadi",
     "copied": "Nusxalandi!",
     "updateFailed": "Yangilashda xatolik",
-    "deleteFailed": "O'chirishda xatolik"
+    "deleteFailed": "O'chirishda xatolik",
+    "queuedTitle": "Yaratish boshlandi",
+    "queuedMessage": "Qo'shig'ingiz fonda yaratilmoqda. Saytdan chiqsangiz ham bo'ladi — tayyor bo'lganda paydo bo'ladi."
   },
   "Errors": {
     "promptTooShort": "Promt juda qisqa (kamida 3 ta belgi)",
@@ -269,5 +274,20 @@
         "name": "Yillik"
       }
     }
+  },
+  "SongsPanel": {
+    "yourSongs": "Qo'shiqlaringiz",
+    "active": "Faol",
+    "history": "Tarix",
+    "loading": "Yuklanmoqda...",
+    "noSongs": "Hali qo'shiq yo'q",
+    "noSongsHint": "Yaratilgan qo'shiqlaringiz shu yerda paydo bo'ladi",
+    "historyEmpty": "O'chirilgan qo'shiqlar yo'q",
+    "historyEmptyHint": "O'chirgan qo'shiqlaringiz 15 kun shu yerda turadi",
+    "restore": "Tiklash",
+    "autoDeleteIn": "{days} kundan keyin avtomatik o'chadi",
+    "autoDeleteSoon": "Tez orada o'chiriladi",
+    "historyHint": "O'chirilgan qo'shiqlar 15 kun saqlanadi, keyin butunlay o'chiriladi",
+    "deleteForeverConfirm": "Bu qo'shiqni butunlay o'chiramizmi? Ortga qaytarib bo'lmaydi."
   }
 }

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, Pause, Music, Globe } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Play, Pause, Music, Globe, Loader2, AlertCircle } from 'lucide-react';
 import { usePlayerStore, Song } from '@/lib/store/player';
 import { formatDuration, cn, timeAgo } from '@/lib/utils';
 import { SongMenu } from './song-menu';
@@ -29,6 +30,7 @@ export function SongCard({
   onUpdate,
   className,
 }: SongCardProps) {
+  const t = useTranslations('Song');
   const { currentSong, isPlaying, setSong, togglePlay } = usePlayerStore();
   const [detailsSong, setDetailsSong] = useState<Song | null>(null);
   const [removed, setRemoved] = useState(false);
@@ -36,16 +38,19 @@ export function SongCard({
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [commentCount, setCommentCount] = useState<number>((song as any).comment_count || 0);
 
+  const status = (song as any).status || (song.is_ready ? 'ready' : 'generating');
+  const isGenerating = status === 'generating' || (!song.is_ready && !status);
+  const isFailed = status === 'failed';
+  const isReady = status === 'ready' && song.is_ready;
+
   const isCurrent = currentSong?.id === song.id;
   const isThisPlaying = isCurrent && isPlaying;
 
   const handlePlay = (e: React.MouseEvent) => {
+    if (!isReady) return;
     e.stopPropagation();
-    if (isCurrent) {
-      togglePlay();
-    } else {
-      setSong(song);
-    }
+    if (isCurrent) togglePlay();
+    else setSong(song);
   };
 
   const handleDelete = (id: string) => {
@@ -65,72 +70,109 @@ export function SongCard({
       <div
         className={cn(
           'group relative flex items-center gap-3 p-3 rounded-xl surface-card transition-all',
-          isCurrent && 'border-gold-700/40',
+          isCurrent && isReady && 'border-gold-700/40',
+          isGenerating && 'border-gold-500/30 bg-midnight-800/60',
+          isFailed && 'border-rose-700/40 bg-rose-950/10',
           className
         )}
       >
-        {/* Play button */}
+        {/* Play / spinner / error icon */}
         <button
           onClick={handlePlay}
+          disabled={!isReady}
           className={cn(
             'relative h-14 w-14 flex-shrink-0 rounded-lg overflow-hidden',
-            'bg-gradient-gold-soft border border-gold-700/30',
-            'flex items-center justify-center',
-            'group-hover:bg-gradient-gold transition-all'
+            'flex items-center justify-center transition-all',
+            isReady
+              ? 'bg-gradient-gold-soft border border-gold-700/30 group-hover:bg-gradient-gold cursor-pointer'
+              : isGenerating
+              ? 'bg-gold-500/10 border border-gold-500/30 cursor-default'
+              : 'bg-rose-950/30 border border-rose-700/30 cursor-default'
           )}
         >
-          <Music
-            className={cn(
-              'h-6 w-6 transition-opacity',
-              'text-gold-400 group-hover:opacity-0',
-              isThisPlaying && 'opacity-0'
-            )}
-          />
-
-          {isThisPlaying && (
-            <div className="absolute inset-0 flex items-center justify-center gap-0.5">
-              <div className="wave-bar h-4" />
-              <div className="wave-bar h-4" />
-              <div className="wave-bar h-4" />
-              <div className="wave-bar h-4" />
-            </div>
+          {isGenerating && (
+            <Loader2 className="h-6 w-6 text-gold-400 animate-spin" />
           )}
 
-          <div
-            className={cn(
-              'absolute inset-0 flex items-center justify-center bg-midnight-950/60',
-              'opacity-0 group-hover:opacity-100 transition-opacity',
-              isThisPlaying && 'group-hover:opacity-100'
-            )}
-          >
-            {isThisPlaying ? (
-              <Pause className="h-5 w-5 text-midnight-950 fill-midnight-950" />
-            ) : (
-              <Play className="h-5 w-5 text-midnight-950 fill-midnight-950 ml-0.5" />
-            )}
-          </div>
+          {isFailed && (
+            <AlertCircle className="h-6 w-6 text-rose-400" />
+          )}
+
+          {isReady && (
+            <>
+              <Music
+                className={cn(
+                  'h-6 w-6 transition-opacity',
+                  'text-gold-400 group-hover:opacity-0',
+                  isThisPlaying && 'opacity-0'
+                )}
+              />
+              {isThisPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center gap-0.5">
+                  <div className="wave-bar h-4" />
+                  <div className="wave-bar h-4" />
+                  <div className="wave-bar h-4" />
+                  <div className="wave-bar h-4" />
+                </div>
+              )}
+              <div
+                className={cn(
+                  'absolute inset-0 flex items-center justify-center bg-midnight-950/60',
+                  'opacity-0 group-hover:opacity-100 transition-opacity',
+                  isThisPlaying && 'group-hover:opacity-100'
+                )}
+              >
+                {isThisPlaying ? (
+                  <Pause className="h-5 w-5 text-midnight-950 fill-midnight-950" />
+                ) : (
+                  <Play className="h-5 w-5 text-midnight-950 fill-midnight-950 ml-0.5" />
+                )}
+              </div>
+            </>
+          )}
         </button>
 
         {/* Title + meta */}
-        <div className="flex-1 min-w-0 cursor-pointer" onClick={handlePlay}>
+        <div
+          className={cn(
+            'flex-1 min-w-0',
+            isReady ? 'cursor-pointer' : 'cursor-default'
+          )}
+          onClick={isReady ? handlePlay : undefined}
+        >
           <div className="flex items-center gap-2">
             <div
               className={cn(
                 'text-sm font-medium truncate',
-                isCurrent ? 'text-gold-200' : 'text-gold-100'
+                isCurrent && isReady ? 'text-gold-200' : 'text-gold-100',
+                isFailed && 'text-rose-200'
               )}
             >
               {song.title}
             </div>
-            {localPublished && (
+            {localPublished && isReady && (
               <Globe className="h-3 w-3 text-gold-500 flex-shrink-0" />
+            )}
+            {isGenerating && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-300 font-semibold uppercase tracking-wider flex-shrink-0 animate-pulse">
+                {t('generating')}
+              </span>
+            )}
+            {isFailed && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold uppercase tracking-wider flex-shrink-0">
+                {t('failed')}
+              </span>
             )}
           </div>
           <div className="text-xs text-gold-700 truncate flex items-center gap-2 mt-0.5">
-            <span>{formatDuration(song.duration_seconds)}</span>
+            {isReady && <span>{formatDuration(song.duration_seconds)}</span>}
+            {isGenerating && <span className="text-gold-500">{t('generatingHint')}</span>}
+            {isFailed && (song as any).error_message && (
+              <span className="text-rose-400/80 truncate">{(song as any).error_message}</span>
+            )}
             {song.created_at && (
               <>
-                <span>·</span>
+                {isReady && <span>·</span>}
                 <span>{timeAgo(song.created_at)}</span>
               </>
             )}
@@ -145,7 +187,7 @@ export function SongCard({
 
         {/* Right side: like + comment + menu */}
         <div className="flex items-center gap-1">
-          {showLikes && (
+          {showLikes && isReady && (
             <LikeButton
               songId={song.id}
               initialCount={(song as any).like_count || 0}
@@ -153,11 +195,13 @@ export function SongCard({
             />
           )}
 
-          <CommentButton
-            count={commentCount}
-            onClick={() => setCommentsOpen(true)}
-            className="px-2 py-1.5 rounded-lg hover:bg-midnight-700/40"
-          />
+          {isReady && (
+            <CommentButton
+              count={commentCount}
+              onClick={() => setCommentsOpen(true)}
+              className="px-2 py-1.5 rounded-lg hover:bg-midnight-700/40"
+            />
+          )}
 
           {showMenu && (
             <SongMenu
@@ -173,13 +217,15 @@ export function SongCard({
 
       <SongDetailsModal song={detailsSong} onClose={() => setDetailsSong(null)} />
 
-      <CommentsDrawer
-        songId={song.id}
-        songTitle={song.title}
-        open={commentsOpen}
-        onClose={() => setCommentsOpen(false)}
-        onCountChange={setCommentCount}
-      />
+      {isReady && (
+        <CommentsDrawer
+          songId={song.id}
+          songTitle={song.title}
+          open={commentsOpen}
+          onClose={() => setCommentsOpen(false)}
+          onCountChange={setCommentCount}
+        />
+      )}
     </>
   );
 }

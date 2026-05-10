@@ -134,7 +134,10 @@
     "voiceMale": "Erkek sesi",
     "voiceFemale": "Kadın sesi",
     "voiceInstrumental": "Enstrümantal",
-    "genres": "Türler"
+    "genres": "Türler",
+    "generating": "Oluşturuluyor",
+    "failed": "Başarısız",
+    "generatingHint": "Müziğiniz oluşturuluyor... (~3 dk)"
   },
   "Notify": {
     "generatingTitle": "Şarkınız oluşturuluyor...",
@@ -155,7 +158,9 @@
     "copyFailed": "Bağlantı kopyalanamadı",
     "copied": "Kopyalandı!",
     "updateFailed": "Güncelleme başarısız",
-    "deleteFailed": "Silme başarısız"
+    "deleteFailed": "Silme başarısız",
+    "queuedTitle": "Oluşturma başladı",
+    "queuedMessage": "Şarkınız arka planda oluşturuluyor. Siteden çıkabilirsiniz — hazır olunca görünecek."
   },
   "Errors": {
     "promptTooShort": "Prompt çok kısa (en az 3 karakter)",
@@ -269,5 +274,20 @@
         "name": "Yıllık"
       }
     }
+  },
+  "SongsPanel": {
+    "yourSongs": "Şarkılarınız",
+    "active": "Aktif",
+    "history": "Geçmiş",
+    "loading": "Yükleniyor...",
+    "noSongs": "Henüz şarkı yok",
+    "noSongsHint": "Oluşturduğunuz şarkılar burada görünecek",
+    "historyEmpty": "Silinmiş şarkı yok",
+    "historyEmptyHint": "Sildiğiniz şarkılar 15 gün burada kalır",
+    "restore": "Geri yükle",
+    "autoDeleteIn": "{days} gün sonra otomatik silinir",
+    "autoDeleteSoon": "Yakında silinecek",
+    "historyHint": "Silinen şarkılar 15 gün saklanır, sonra tamamen silinir",
+    "deleteForeverConfirm": "Bu şarkı kalıcı olarak silinsin mi? Geri alınamaz."
   }
 }

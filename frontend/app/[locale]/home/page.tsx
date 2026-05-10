@@ -35,20 +35,23 @@ export default function HomePage() {
       setUser(u);
       if (!u) return;
 
-      // My recent songs (no is_ready filter — show all)
+      // My recent songs (active only, not deleted)
       const { data: my } = await supabase
         .from('songs')
         .select('*')
         .eq('user_id', u.id)
+        .is('deleted_at', null)
         .order('created_at', { ascending: false })
         .limit(4);
       if (my) setMySongs(my as Song[]);
 
-      // Community feed
+      // Community feed (active + published)
       const { data: pub } = await supabase
         .from('songs')
         .select('*')
         .eq('is_published', true)
+        .eq('is_ready', true)
+        .is('deleted_at', null)
         .order('created_at', { ascending: false })
         .limit(6);
       if (pub) setExploreSongs(pub as Song[]);

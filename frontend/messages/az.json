@@ -134,7 +134,10 @@
     "voiceMale": "Kişi səsi",
     "voiceFemale": "Qadın səsi",
     "voiceInstrumental": "İnstrumental",
-    "genres": "Janrlar"
+    "genres": "Janrlar",
+    "generating": "Yaradılır",
+    "failed": "Uğursuz",
+    "generatingHint": "Musiqiniz yaradılır... (~3 dəq)"
   },
   "Notify": {
     "generatingTitle": "Mahnınız yaradılır...",
@@ -155,7 +158,9 @@
     "copyFailed": "Linki kopyalamaq mümkün olmadı",
     "copied": "Kopyalandı!",
     "updateFailed": "Yeniləmə uğursuz oldu",
-    "deleteFailed": "Silmə uğursuz oldu"
+    "deleteFailed": "Silmə uğursuz oldu",
+    "queuedTitle": "Yaratma başladı",
+    "queuedMessage": "Mahnınız arxa fonda yaradılır. Saytdan çıxa bilərsiniz — hazır olanda görünəcək."
   },
   "Errors": {
     "promptTooShort": "Prompt çox qısadır (ən azı 3 simvol)",
@@ -269,5 +274,20 @@
         "name": "İllik"
       }
     }
+  },
+  "SongsPanel": {
+    "yourSongs": "Mahnılarınız",
+    "active": "Aktiv",
+    "history": "Tarixçə",
+    "loading": "Yüklənir...",
+    "noSongs": "Hələ mahnı yoxdur",
+    "noSongsHint": "Yaratdığınız mahnılar burada görünəcək",
+    "historyEmpty": "Silinmiş mahnı yoxdur",
+    "historyEmptyHint": "Sildiyiniz mahnılar 15 gün burada qalacaq",
+    "restore": "Bərpa et",
+    "autoDeleteIn": "{days} gün sonra avtomatik silinir",
+    "autoDeleteSoon": "Tezliklə silinəcək",
+    "historyHint": "Silinmiş mahnılar 15 gün saxlanılır, sonra tamamilə silinir",
+    "deleteForeverConfirm": "Bu mahnını həmişəlik silməli? Geri qaytarmaq olmaz."
   }
 }

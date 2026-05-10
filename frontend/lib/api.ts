@@ -18,11 +18,12 @@ export interface GenerateRequest {
 
 export interface GenerateResponse {
   song_id: string;
-  audio_url: string;
-  duration: number;
-  prompt: string;
-  status: string;
+  status: 'generating' | 'ready' | 'failed';
   credits_remaining: number;
+  // Legacy fields (no longer returned, kept for compatibility)
+  audio_url?: string;
+  duration?: number;
+  prompt?: string;
 }
 
 export class GenerateError extends Error {
