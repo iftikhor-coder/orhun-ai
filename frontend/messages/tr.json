@@ -24,31 +24,28 @@
     "wrongCredentials": "E-posta veya şifre yanlış"
   },
   "Onboarding": {
-    "back": "Geri",
-    "next": "İleri",
-    "finish": "Bitir",
+    "title": "Profilinizi oluşturun",
     "dob": {
-      "title": "Ne zaman doğdunuz?",
-      "subtitle": "Deneyiminizi kişiselleştireceğiz",
-      "year": "Yıl",
-      "month": "Ay",
+      "title": "Doğum tarihiniz?",
+      "subtitle": "Deneyiminizi kişiselleştirmek için",
       "day": "Gün",
-      "tooYoung": "En az 13 yaşında olmalısınız"
-    },
-    "profile": {
-      "title": "Kendinizden bahsedin",
-      "subtitle": "Kullanıcı adı seçin ve fotoğraf ekleyin",
-      "username": "Kullanıcı adı",
-      "usernamePlaceholder": "Eşsiz adınız",
-      "fullName": "Tam ad",
-      "fullNamePlaceholder": "Size nasıl seslenelim?",
-      "uploadAvatar": "Fotoğraf yükle",
-      "skip": "Atla"
-    },
-    "genres": {
-      "title": "Hangi müziği seviyorsunuz?",
-      "subtitle": "En az 3 tür seçin",
-      "minSelected": "En az 3 seçin — seçilen: {count}"
+      "month": "Ay",
+      "year": "Yıl",
+      "months": [
+        "Ocak",
+        "Şubat",
+        "Mart",
+        "Nisan",
+        "Mayıs",
+        "Haziran",
+        "Temmuz",
+        "Ağustos",
+        "Eylül",
+        "Ekim",
+        "Kasım",
+        "Aralık"
+      ],
+      "continue": "Devam et"
     }
   },
   "Sidebar": {

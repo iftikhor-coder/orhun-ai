@@ -24,31 +24,28 @@
     "wrongCredentials": "Email və ya şifrə yanlışdır"
   },
   "Onboarding": {
-    "back": "Geri",
-    "next": "Növbəti",
-    "finish": "Bitir",
+    "title": "Profilinizi yaradın",
     "dob": {
-      "title": "Nə vaxt doğulmusunuz?",
-      "subtitle": "Təcrübənizi şəxsiləşdirəcəyik",
-      "year": "İl",
-      "month": "Ay",
+      "title": "Doğum tarixiniz?",
+      "subtitle": "Təcrübənizi fərdiləşdirmək üçün",
       "day": "Gün",
-      "tooYoung": "Ən azı 13 yaşında olmalısınız"
-    },
-    "profile": {
-      "title": "Özünüz haqqında",
-      "subtitle": "İstifadəçi adı seçin və şəkil əlavə edin",
-      "username": "İstifadəçi adı",
-      "usernamePlaceholder": "Sizin unikal adınız",
-      "fullName": "Tam ad",
-      "fullNamePlaceholder": "Sizi necə çağıraq?",
-      "uploadAvatar": "Şəkil yüklə",
-      "skip": "Keç"
-    },
-    "genres": {
-      "title": "Hansı musiqini sevirsiniz?",
-      "subtitle": "Ən azı 3 janr seçin",
-      "minSelected": "Ən azı 3 seçin — seçilib: {count}"
+      "month": "Ay",
+      "year": "İl",
+      "months": [
+        "Yanvar",
+        "Fevral",
+        "Mart",
+        "Aprel",
+        "May",
+        "İyun",
+        "İyul",
+        "Avqust",
+        "Sentyabr",
+        "Oktyabr",
+        "Noyabr",
+        "Dekabr"
+      ],
+      "continue": "Davam et"
     }
   },
   "Sidebar": {

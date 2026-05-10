@@ -24,31 +24,28 @@
     "wrongCredentials": "Email yoki parol noto'g'ri"
   },
   "Onboarding": {
-    "back": "Orqaga",
-    "next": "Keyingisi",
-    "finish": "Tugatish",
+    "title": "Profilingizni yarating",
     "dob": {
-      "title": "Qachon tug'ilgansiz?",
-      "subtitle": "Tajribangizni shaxsiylashtiramiz",
-      "year": "Yil",
-      "month": "Oy",
+      "title": "Tug'ilgan sanangiz?",
+      "subtitle": "Tajribangizni shaxsiylashtirish uchun",
       "day": "Kun",
-      "tooYoung": "Yoshingiz kamida 13'da bo'lishi kerak"
-    },
-    "profile": {
-      "title": "O'zingiz haqingizda",
-      "subtitle": "Username tanlang va rasm qo'shing",
-      "username": "Username",
-      "usernamePlaceholder": "Sizning unikal nomingiz",
-      "fullName": "To'liq ism",
-      "fullNamePlaceholder": "Sizni qanday chaqirsak?",
-      "uploadAvatar": "Rasm yuklash",
-      "skip": "O'tkazib yuborish"
-    },
-    "genres": {
-      "title": "Qanday musiqani yaxshi ko'rasiz?",
-      "subtitle": "Kamida 3 ta janr tanlang",
-      "minSelected": "Kamida 3 ta tanlang — tanlandi: {count}"
+      "month": "Oy",
+      "year": "Yil",
+      "months": [
+        "Yanvar",
+        "Fevral",
+        "Mart",
+        "Aprel",
+        "May",
+        "Iyun",
+        "Iyul",
+        "Avgust",
+        "Sentabr",
+        "Oktabr",
+        "Noyabr",
+        "Dekabr"
+      ],
+      "continue": "Davom etish"
     }
   },
   "Sidebar": {

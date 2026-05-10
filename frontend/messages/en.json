@@ -24,31 +24,28 @@
     "wrongCredentials": "Wrong email or password"
   },
   "Onboarding": {
-    "back": "Back",
-    "next": "Next",
-    "finish": "Finish",
+    "title": "Create Your Profile",
     "dob": {
       "title": "When were you born?",
-      "subtitle": "We'll personalize your experience",
-      "year": "Year",
-      "month": "Month",
+      "subtitle": "We use this to personalize your experience",
       "day": "Day",
-      "tooYoung": "You must be at least 13 years old"
-    },
-    "profile": {
-      "title": "Tell us about you",
-      "subtitle": "Pick a username and add a photo",
-      "username": "Username",
-      "usernamePlaceholder": "Your unique handle",
-      "fullName": "Full name",
-      "fullNamePlaceholder": "How should we call you?",
-      "uploadAvatar": "Upload photo",
-      "skip": "Skip"
-    },
-    "genres": {
-      "title": "What music do you love?",
-      "subtitle": "Pick at least 3 genres",
-      "minSelected": "Pick at least 3 — selected: {count}"
+      "month": "Month",
+      "year": "Year",
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "continue": "Continue"
     }
   },
   "Sidebar": {
