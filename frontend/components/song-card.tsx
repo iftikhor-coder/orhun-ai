@@ -7,6 +7,8 @@ import { formatDuration, cn, timeAgo } from '@/lib/utils';
 import { SongMenu } from './song-menu';
 import { LikeButton } from './like-button';
 import { SongDetailsModal } from './song-details-modal';
+import { CommentButton } from './comment-button';
+import { CommentsDrawer } from './comments-drawer';
 
 interface SongCardProps {
   song: Song;
@@ -31,6 +33,8 @@ export function SongCard({
   const [detailsSong, setDetailsSong] = useState<Song | null>(null);
   const [removed, setRemoved] = useState(false);
   const [localPublished, setLocalPublished] = useState(song.is_published);
+  const [commentsOpen, setCommentsOpen] = useState(false);
+  const [commentCount, setCommentCount] = useState<number>((song as any).comment_count || 0);
 
   const isCurrent = currentSong?.id === song.id;
   const isThisPlaying = isCurrent && isPlaying;
@@ -139,7 +143,7 @@ export function SongCard({
           </div>
         </div>
 
-        {/* Right side: like + menu */}
+        {/* Right side: like + comment + menu */}
         <div className="flex items-center gap-1">
           {showLikes && (
             <LikeButton
@@ -148,6 +152,12 @@ export function SongCard({
               className="px-2 py-1.5 rounded-lg hover:bg-midnight-700/40"
             />
           )}
+
+          <CommentButton
+            count={commentCount}
+            onClick={() => setCommentsOpen(true)}
+            className="px-2 py-1.5 rounded-lg hover:bg-midnight-700/40"
+          />
 
           {showMenu && (
             <SongMenu
@@ -162,6 +172,14 @@ export function SongCard({
       </div>
 
       <SongDetailsModal song={detailsSong} onClose={() => setDetailsSong(null)} />
+
+      <CommentsDrawer
+        songId={song.id}
+        songTitle={song.title}
+        open={commentsOpen}
+        onClose={() => setCommentsOpen(false)}
+        onCountChange={setCommentCount}
+      />
     </>
   );
 }

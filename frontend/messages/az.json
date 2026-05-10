@@ -119,7 +119,8 @@
     "lyrics": "Sözlər",
     "voiceMale": "Kişi səsi",
     "voiceFemale": "Qadın səsi",
-    "voiceInstrumental": "İnstrumental"
+    "voiceInstrumental": "İnstrumental",
+    "genres": "Janrlar"
   },
   "Notify": {
     "generatingTitle": "Mahnınız yaradılır...",
@@ -167,5 +168,33 @@
     "house": "House",
     "techno": "Texno",
     "indie": "İndi"
+  },
+  "Comments": {
+    "title": "Şərhlər",
+    "inputPlaceholder": "Fikrinizi yazın...",
+    "post": "Göndər",
+    "hint": "Enter — göndər · Shift+Enter — yeni sətir",
+    "empty": "Hələ şərh yoxdur",
+    "beTheFirst": "İlk şərhi siz yazın",
+    "you": "siz",
+    "delete": "Sil",
+    "deleteConfirm": "Bu şərhi silmək?",
+    "deleted": "Şərh silindi",
+    "deleteFailed": "Şərh silinə bilmədi",
+    "postFailed": "Şərh göndərilə bilmədi",
+    "loginRequired": "Şərh yazmaq üçün daxil olun"
+  },
+  "Avatar": {
+    "upload": "Şəkil yüklə",
+    "change": "Şəkli dəyiş",
+    "uploading": "Yüklənir...",
+    "uploaded": "Şəkil yeniləndi",
+    "uploadFailed": "Yükləmə uğursuz oldu",
+    "invalidFile": "Zəhmət olmasa şəkil faylı seçin",
+    "tooLarge": "Fayl çox böyükdür (maksimum 5MB)"
+  },
+  "UserGenres": {
+    "title": "Sevimli janrlarınız",
+    "empty": "Janr seçilməyib"
   }
 }

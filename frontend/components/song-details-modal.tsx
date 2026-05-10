@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { X, Music, Sparkles, Mic, Clock, Tag, Calendar } from 'lucide-react';
 import { Song } from '@/lib/store/player';
 import { formatDuration, timeAgo } from '@/lib/utils';
+import { GenresDisplay } from './genres-display';
 
 interface SongDetailsModalProps {
   song: Song | null;
@@ -69,6 +70,13 @@ export function SongDetailsModal({ song, onClose }: SongDetailsModalProps) {
               {song.prompt || <span className="italic text-gold-700">—</span>}
             </div>
           </Section>
+
+          {/* Genres */}
+          {(song as any).genres && (
+            <Section icon={Tag} title={t('genres') || 'Genres'}>
+              <GenresDisplay genreSlugs={(song as any).genres} size="sm" />
+            </Section>
+          )}
 
           {/* Lyrics */}
           {song.lyrics && song.lyrics.trim() && (

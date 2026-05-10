@@ -119,7 +119,8 @@
     "lyrics": "So'zlar",
     "voiceMale": "Erkak ovoz",
     "voiceFemale": "Ayol ovoz",
-    "voiceInstrumental": "Instrumental"
+    "voiceInstrumental": "Instrumental",
+    "genres": "Janrlar"
   },
   "Notify": {
     "generatingTitle": "Qo'shig'ingiz yaratilyapti...",
@@ -167,5 +168,33 @@
     "house": "House",
     "techno": "Texno",
     "indie": "Indi"
+  },
+  "Comments": {
+    "title": "Izohlar",
+    "inputPlaceholder": "Fikringizni yozing...",
+    "post": "Yuborish",
+    "hint": "Enter — yuborish · Shift+Enter — yangi qator",
+    "empty": "Hali izohlar yo'q",
+    "beTheFirst": "Birinchi izoh qoldiring",
+    "you": "siz",
+    "delete": "O'chirish",
+    "deleteConfirm": "Izohni o'chirasizmi?",
+    "deleted": "Izoh o'chirildi",
+    "deleteFailed": "Izohni o'chirib bo'lmadi",
+    "postFailed": "Izohni yuborib bo'lmadi",
+    "loginRequired": "Izoh yozish uchun kiring"
+  },
+  "Avatar": {
+    "upload": "Rasm yuklash",
+    "change": "Rasmni o'zgartirish",
+    "uploading": "Yuklanyapti...",
+    "uploaded": "Rasm yangilandi",
+    "uploadFailed": "Yuklab bo'lmadi",
+    "invalidFile": "Iltimos rasm faylini tanlang",
+    "tooLarge": "Fayl juda katta (maksimum 5MB)"
+  },
+  "UserGenres": {
+    "title": "Sevimli janrlaringiz",
+    "empty": "Janr tanlanmagan"
   }
 }

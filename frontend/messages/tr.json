@@ -119,7 +119,8 @@
     "lyrics": "Sözler",
     "voiceMale": "Erkek sesi",
     "voiceFemale": "Kadın sesi",
-    "voiceInstrumental": "Enstrümantal"
+    "voiceInstrumental": "Enstrümantal",
+    "genres": "Türler"
   },
   "Notify": {
     "generatingTitle": "Şarkınız oluşturuluyor...",
@@ -167,5 +168,33 @@
     "house": "House",
     "techno": "Tekno",
     "indie": "Indie"
+  },
+  "Comments": {
+    "title": "Yorumlar",
+    "inputPlaceholder": "Düşüncelerinizi paylaşın...",
+    "post": "Gönder",
+    "hint": "Enter — gönder · Shift+Enter — yeni satır",
+    "empty": "Henüz yorum yok",
+    "beTheFirst": "İlk yorumu siz yapın",
+    "you": "siz",
+    "delete": "Sil",
+    "deleteConfirm": "Bu yorumu silmek?",
+    "deleted": "Yorum silindi",
+    "deleteFailed": "Yorum silinemedi",
+    "postFailed": "Yorum gönderilemedi",
+    "loginRequired": "Yorum yapmak için giriş yapın"
+  },
+  "Avatar": {
+    "upload": "Fotoğraf yükle",
+    "change": "Fotoğrafı değiştir",
+    "uploading": "Yükleniyor...",
+    "uploaded": "Fotoğraf güncellendi",
+    "uploadFailed": "Yükleme başarısız",
+    "invalidFile": "Lütfen bir resim dosyası seçin",
+    "tooLarge": "Dosya çok büyük (maksimum 5MB)"
+  },
+  "UserGenres": {
+    "title": "Sevdiğiniz türler",
+    "empty": "Tür seçilmemiş"
   }
 }

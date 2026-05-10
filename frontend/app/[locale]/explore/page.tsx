@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/client';
 import { Sidebar } from '@/components/sidebar';
 import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
+import { UserGenresWidget } from '@/components/user-genres-widget';
 import { Song } from '@/lib/store/player';
 import { cn } from '@/lib/utils';
 
@@ -71,6 +72,8 @@ export default function ExplorePage() {
               </button>
             ))}
           </div>
+
+          <UserGenresWidget className="mb-6" variant="horizontal" />
 
           {songs.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">

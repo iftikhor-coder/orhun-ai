@@ -8,6 +8,7 @@ import { createClient } from '@/lib/supabase/client';
 import { Sidebar } from '@/components/sidebar';
 import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
+import { UserGenresWidget } from '@/components/user-genres-widget';
 import { Song } from '@/lib/store/player';
 import { getTimeOfDay, cn } from '@/lib/utils';
 
@@ -113,6 +114,8 @@ export default function HomePage() {
               </div>
             </div>
           </form>
+
+          <UserGenresWidget className="mb-12 animate-fade-in-up" variant="sidebar" />
 
           {mySongs.length > 0 && (
             <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
