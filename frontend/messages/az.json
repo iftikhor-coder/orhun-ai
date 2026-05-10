@@ -25,6 +25,15 @@
   },
   "Onboarding": {
     "title": "Profilinizi yaradın",
+    "profile": {
+      "title": "Profilinizi quraşdırın",
+      "subtitle": "Özünüz haqqında məlumat verin",
+      "avatar": "Şəkil yükləyin",
+      "username": "İstifadəçi adı",
+      "usernamePlaceholder": "Ad seçin",
+      "fullName": "Tam ad",
+      "fullNamePlaceholder": "Sizin tam adınız"
+    },
     "dob": {
       "title": "Doğum tarixiniz?",
       "subtitle": "Təcrübənizi fərdiləşdirmək üçün",
@@ -44,9 +53,14 @@
         "Oktyabr",
         "Noyabr",
         "Dekabr"
-      ],
-      "continue": "Davam et"
-    }
+      ]
+    },
+    "genres": {
+      "title": "Hansı musiqi xoşunuza gəlir?",
+      "subtitle": "Sevdiyiniz janrları seçin"
+    },
+    "back": "Geri",
+    "continue": "Davam et"
   },
   "Sidebar": {
     "home": "Əsas",
@@ -200,5 +214,11 @@
     "markAllRead": "Hamısını oxudum",
     "empty": "Hələ bildiriş yoxdur",
     "emptyHint": "Orhun AI yenilikləri burada görünəcək"
+  },
+  "Languages": {
+    "en": "İngiliscə",
+    "uz": "Özbəkcə",
+    "az": "Azərbaycanca",
+    "tr": "Türkcə"
   }
 }

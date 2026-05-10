@@ -25,6 +25,15 @@
   },
   "Onboarding": {
     "title": "Profilinizi oluşturun",
+    "profile": {
+      "title": "Profilinizi ayarlayın",
+      "subtitle": "Kendiniz hakkında bilgi verin",
+      "avatar": "Fotoğraf yükle",
+      "username": "Kullanıcı adı",
+      "usernamePlaceholder": "Bir ad seçin",
+      "fullName": "Tam ad",
+      "fullNamePlaceholder": "Tam adınız"
+    },
     "dob": {
       "title": "Doğum tarihiniz?",
       "subtitle": "Deneyiminizi kişiselleştirmek için",
@@ -44,9 +53,14 @@
         "Ekim",
         "Kasım",
         "Aralık"
-      ],
-      "continue": "Devam et"
-    }
+      ]
+    },
+    "genres": {
+      "title": "Hangi müziği seversiniz?",
+      "subtitle": "Favori türlerinizi seçin"
+    },
+    "back": "Geri",
+    "continue": "Devam et"
   },
   "Sidebar": {
     "home": "Ana Sayfa",
@@ -200,5 +214,11 @@
     "markAllRead": "Tümünü okundu",
     "empty": "Henüz bildirim yok",
     "emptyHint": "Orhun AI güncellemeleri burada görünecek"
+  },
+  "Languages": {
+    "en": "İngilizce",
+    "uz": "Özbekçe",
+    "az": "Azerice",
+    "tr": "Türkçe"
   }
 }

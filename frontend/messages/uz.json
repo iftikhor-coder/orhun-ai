@@ -25,6 +25,15 @@
   },
   "Onboarding": {
     "title": "Profilingizni yarating",
+    "profile": {
+      "title": "Profilingizni sozlang",
+      "subtitle": "O'zingiz haqingizda ma'lumot bering",
+      "avatar": "Rasm yuklash",
+      "username": "Foydalanuvchi nomi",
+      "usernamePlaceholder": "Nom tanlang",
+      "fullName": "To'liq ism",
+      "fullNamePlaceholder": "Sizning to'liq ismingiz"
+    },
     "dob": {
       "title": "Tug'ilgan sanangiz?",
       "subtitle": "Tajribangizni shaxsiylashtirish uchun",
@@ -44,9 +53,14 @@
         "Oktabr",
         "Noyabr",
         "Dekabr"
-      ],
-      "continue": "Davom etish"
-    }
+      ]
+    },
+    "genres": {
+      "title": "Qanday musiqa yoqtirасiz?",
+      "subtitle": "Sevimli janrlaringizni tanlang"
+    },
+    "back": "Orqaga",
+    "continue": "Davom etish"
   },
   "Sidebar": {
     "home": "Asosiy",
@@ -200,5 +214,11 @@
     "markAllRead": "Hammasini o'qildi qilish",
     "empty": "Hali bildirishnomalar yo'q",
     "emptyHint": "Orhun AI'dan yangiliklar shu yerda paydo bo'ladi"
+  },
+  "Languages": {
+    "en": "Inglizcha",
+    "uz": "O'zbekcha",
+    "az": "Ozarbayjoncha",
+    "tr": "Turkcha"
   }
 }

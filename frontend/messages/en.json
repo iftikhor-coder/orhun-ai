@@ -25,6 +25,15 @@
   },
   "Onboarding": {
     "title": "Create Your Profile",
+    "profile": {
+      "title": "Set up your profile",
+      "subtitle": "Tell us about yourself",
+      "avatar": "Upload photo",
+      "username": "Username",
+      "usernamePlaceholder": "Choose a username",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Your full name"
+    },
     "dob": {
       "title": "When were you born?",
       "subtitle": "We use this to personalize your experience",
@@ -44,9 +53,14 @@
         "October",
         "November",
         "December"
-      ],
-      "continue": "Continue"
-    }
+      ]
+    },
+    "genres": {
+      "title": "What music do you like?",
+      "subtitle": "Choose your favorite genres"
+    },
+    "back": "Back",
+    "continue": "Continue"
   },
   "Sidebar": {
     "home": "Home",
@@ -200,5 +214,11 @@
     "markAllRead": "Mark all read",
     "empty": "No notifications yet",
     "emptyHint": "Updates from Orhun AI will appear here"
+  },
+  "Languages": {
+    "en": "English",
+    "uz": "O'zbekcha",
+    "az": "Azərbaycanca",
+    "tr": "Türkçe"
   }
 }
