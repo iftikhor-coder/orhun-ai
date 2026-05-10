@@ -196,5 +196,12 @@
   "UserGenres": {
     "title": "Your genres",
     "empty": "No genres selected"
+  },
+  "Notifications": {
+    "title": "Notifications",
+    "unread": "unread",
+    "markAllRead": "Mark all read",
+    "empty": "No notifications yet",
+    "emptyHint": "Updates from Orhun AI will appear here"
   }
 }

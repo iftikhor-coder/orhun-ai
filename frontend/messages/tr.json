@@ -196,5 +196,12 @@
   "UserGenres": {
     "title": "Sevdiğiniz türler",
     "empty": "Tür seçilmemiş"
+  },
+  "Notifications": {
+    "title": "Bildirimler",
+    "unread": "okunmamış",
+    "markAllRead": "Tümünü okundu",
+    "empty": "Henüz bildirim yok",
+    "emptyHint": "Orhun AI güncellemeleri burada görünecek"
   }
 }

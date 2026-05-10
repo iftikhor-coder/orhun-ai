@@ -196,5 +196,12 @@
   "UserGenres": {
     "title": "Sevimli janrlarınız",
     "empty": "Janr seçilməyib"
+  },
+  "Notifications": {
+    "title": "Bildirişlər",
+    "unread": "oxunmamış",
+    "markAllRead": "Hamısını oxudum",
+    "empty": "Hələ bildiriş yoxdur",
+    "emptyHint": "Orhun AI yenilikləri burada görünəcək"
   }
 }

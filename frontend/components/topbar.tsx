@@ -7,6 +7,7 @@ import { Sparkles, LogOut, Clock } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { LanguageSwitcher } from './language-switcher';
 import { Logo } from './logo';
+import { NotificationBell } from './notification-bell';
 import { cn } from '@/lib/utils';
 
 export function TopBar() {
@@ -119,6 +120,8 @@ export function TopBar() {
               </>
             )}
           </div>
+
+          <NotificationBell />
 
           <LanguageSwitcher />
 

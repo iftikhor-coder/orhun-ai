@@ -196,5 +196,12 @@
   "UserGenres": {
     "title": "Sevimli janrlaringiz",
     "empty": "Janr tanlanmagan"
+  },
+  "Notifications": {
+    "title": "Bildirishnomalar",
+    "unread": "o'qilmagan",
+    "markAllRead": "Hammasini o'qildi qilish",
+    "empty": "Hali bildirishnomalar yo'q",
+    "emptyHint": "Orhun AI'dan yangiliklar shu yerda paydo bo'ladi"
   }
 }
