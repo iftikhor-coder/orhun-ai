@@ -75,23 +75,36 @@ export default function GenresPage() {
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        await supabase.from('user_genres').delete().eq('user_id', user.id);
-        const rows = Array.from(selected).map((genre_id) => ({
-          user_id: user.id,
-          genre_id,
-        }));
-        await supabase.from('user_genres').insert(rows);
-
-        // ⭐ Mark onboarding completed
-        await supabase
-          .from('profiles')
-          .update({ onboarding_completed: true })
-          .eq('id', user.id);
+      if (!user) {
+        console.error('No user found');
+        return;
       }
+
+      // Save user genres
+      await supabase.from('user_genres').delete().eq('user_id', user.id);
+      const rows = Array.from(selected).map((genre_id) => ({
+        user_id: user.id,
+        genre_id,
+      }));
+      await supabase.from('user_genres').insert(rows);
+
+      // ⭐ Mark onboarding completed — WITH VERIFICATION
+      const { data: updateResult, error: updateError } = await supabase
+        .from('profiles')
+        .update({ onboarding_completed: true })
+        .eq('id', user.id)
+        .select('onboarding_completed')
+        .single();
+
+      if (updateError) {
+        console.error('❌ Failed to update onboarding_completed:', updateError);
+      } else {
+        console.log('✅ Onboarding completed:', updateResult);
+      }
+
       router.push(`/${locale}/home`);
     } catch (e) {
-      console.error(e);
+      console.error('❌ Error in handleFinish:', e);
       router.push(`/${locale}/home`);
     } finally {
       setSaving(false);
