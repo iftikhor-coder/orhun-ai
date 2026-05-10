@@ -223,5 +223,51 @@
     "uz": "Özbəkcə",
     "az": "Azərbaycanca",
     "tr": "Türkcə"
+  },
+  "ProfileMenu": {
+    "noName": "Ad yoxdur",
+    "editProfile": "Profili redaktə et",
+    "subscription": "Abunəlik",
+    "upgrade": "Yüksəlt",
+    "signOut": "Çıxış"
+  },
+  "ProfileEdit": {
+    "title": "Profili redaktə et",
+    "username": "İstifadəçi adı",
+    "fullName": "Tam ad",
+    "fullNamePlaceholder": "Sizin tam adınız",
+    "dob": "Doğum tarixi",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et",
+    "usernameRequired": "İstifadəçi adı tələb olunur",
+    "usernameTooShort": "İstifadəçi adı ən azı 3 simvol olmalıdır",
+    "usernameTaken": "Bu istifadəçi adı tutulub",
+    "saveFailed": "Saxlanılmadı. Yenidən cəhd edin."
+  },
+  "Subscription": {
+    "title": "Abunəlik",
+    "headline": "Limitsiz yaradıcılığı aç",
+    "subheadline": "Orhun AI ilə yolculuğunuza uyğun planı seçin",
+    "mostPopular": "Ən populyar",
+    "perMonth": "aylıq",
+    "perYear": "illik",
+    "perPeriod": "{months} ay üçün",
+    "shortMonth": "ay",
+    "subscribe": "Abunə ol",
+    "selectPlan": "Plan seçin",
+    "noPlans": "Plan yoxdur",
+    "comingSoon": "Ödəniş sistemi tezliklə!",
+    "disclaimer": "İstənilən vaxt ləğv edə bilərsiniz. Qiymətlər dəyişə bilər.",
+    "plans": {
+      "monthly": {
+        "name": "Aylıq"
+      },
+      "six_month": {
+        "name": "6 aylıq"
+      },
+      "yearly": {
+        "name": "İllik"
+      }
+    }
   }
 }

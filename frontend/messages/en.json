@@ -223,5 +223,51 @@
     "uz": "O'zbekcha",
     "az": "Azərbaycanca",
     "tr": "Türkçe"
+  },
+  "ProfileMenu": {
+    "noName": "No name",
+    "editProfile": "Edit Profile",
+    "subscription": "Subscription",
+    "upgrade": "Upgrade",
+    "signOut": "Sign out"
+  },
+  "ProfileEdit": {
+    "title": "Edit Profile",
+    "username": "Username",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Your full name",
+    "dob": "Date of birth",
+    "save": "Save",
+    "cancel": "Cancel",
+    "usernameRequired": "Username is required",
+    "usernameTooShort": "Username must be at least 3 characters",
+    "usernameTaken": "Username is already taken",
+    "saveFailed": "Failed to save. Please try again."
+  },
+  "Subscription": {
+    "title": "Subscription",
+    "headline": "Unlock unlimited creativity",
+    "subheadline": "Choose the plan that fits your journey with Orhun AI",
+    "mostPopular": "Most Popular",
+    "perMonth": "per month",
+    "perYear": "per year",
+    "perPeriod": "for {months} months",
+    "shortMonth": "mo",
+    "subscribe": "Subscribe",
+    "selectPlan": "Select a plan",
+    "noPlans": "No plans available",
+    "comingSoon": "Payment integration coming soon!",
+    "disclaimer": "Cancel anytime. Prices may change.",
+    "plans": {
+      "monthly": {
+        "name": "Monthly"
+      },
+      "six_month": {
+        "name": "6-Month"
+      },
+      "yearly": {
+        "name": "Yearly"
+      }
+    }
   }
 }

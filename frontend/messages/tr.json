@@ -223,5 +223,51 @@
     "uz": "Özbekçe",
     "az": "Azerice",
     "tr": "Türkçe"
+  },
+  "ProfileMenu": {
+    "noName": "İsim yok",
+    "editProfile": "Profili Düzenle",
+    "subscription": "Abonelik",
+    "upgrade": "Yükselt",
+    "signOut": "Çıkış"
+  },
+  "ProfileEdit": {
+    "title": "Profili Düzenle",
+    "username": "Kullanıcı adı",
+    "fullName": "Tam ad",
+    "fullNamePlaceholder": "Tam adınız",
+    "dob": "Doğum tarihi",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "usernameRequired": "Kullanıcı adı gerekli",
+    "usernameTooShort": "Kullanıcı adı en az 3 karakter olmalı",
+    "usernameTaken": "Bu kullanıcı adı alınmış",
+    "saveFailed": "Kaydedilemedi. Tekrar deneyin."
+  },
+  "Subscription": {
+    "title": "Abonelik",
+    "headline": "Sınırsız yaratıcılığı keşfedin",
+    "subheadline": "Orhun AI ile yolculuğunuza uygun planı seçin",
+    "mostPopular": "En Popüler",
+    "perMonth": "aylık",
+    "perYear": "yıllık",
+    "perPeriod": "{months} ay için",
+    "shortMonth": "ay",
+    "subscribe": "Abone Ol",
+    "selectPlan": "Plan seçin",
+    "noPlans": "Plan bulunmuyor",
+    "comingSoon": "Ödeme sistemi yakında!",
+    "disclaimer": "İstediğiniz zaman iptal edin. Fiyatlar değişebilir.",
+    "plans": {
+      "monthly": {
+        "name": "Aylık"
+      },
+      "six_month": {
+        "name": "6 Aylık"
+      },
+      "yearly": {
+        "name": "Yıllık"
+      }
+    }
   }
 }

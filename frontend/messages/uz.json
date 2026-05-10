@@ -223,5 +223,51 @@
     "uz": "O'zbekcha",
     "az": "Ozarbayjoncha",
     "tr": "Turkcha"
+  },
+  "ProfileMenu": {
+    "noName": "Ism yo'q",
+    "editProfile": "Profilni tahrirlash",
+    "subscription": "Obuna",
+    "upgrade": "Yangilash",
+    "signOut": "Chiqish"
+  },
+  "ProfileEdit": {
+    "title": "Profilni tahrirlash",
+    "username": "Foydalanuvchi nomi",
+    "fullName": "To'liq ism",
+    "fullNamePlaceholder": "Sizning to'liq ismingiz",
+    "dob": "Tug'ilgan sana",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "usernameRequired": "Foydalanuvchi nomi kerak",
+    "usernameTooShort": "Foydalanuvchi nomi kamida 3 belgi bo'lishi kerak",
+    "usernameTaken": "Bu foydalanuvchi nomi band",
+    "saveFailed": "Saqlashda xato. Qayta urinib ko'ring."
+  },
+  "Subscription": {
+    "title": "Obuna",
+    "headline": "Cheksiz ijodni oching",
+    "subheadline": "Orhun AI bilan sayohatingiz uchun mos tarifni tanlang",
+    "mostPopular": "Eng mashhur",
+    "perMonth": "oyiga",
+    "perYear": "yiliga",
+    "perPeriod": "{months} oy uchun",
+    "shortMonth": "oy",
+    "subscribe": "Obuna bo'lish",
+    "selectPlan": "Tarif tanlang",
+    "noPlans": "Tariflar mavjud emas",
+    "comingSoon": "To'lov tizimi tez orada!",
+    "disclaimer": "Istalgan vaqtda bekor qiling. Narxlar o'zgarishi mumkin.",
+    "plans": {
+      "monthly": {
+        "name": "Oylik"
+      },
+      "six_month": {
+        "name": "6 oylik"
+      },
+      "yearly": {
+        "name": "Yillik"
+      }
+    }
   }
 }
