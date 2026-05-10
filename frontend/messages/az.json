@@ -32,7 +32,8 @@
       "username": "İstifadəçi adı",
       "usernamePlaceholder": "Ad seçin",
       "fullName": "Tam ad",
-      "fullNamePlaceholder": "Sizin tam adınız"
+      "fullNamePlaceholder": "Sizin tam adınız",
+      "uploadAvatar": "Şəkil yükləyin"
     },
     "dob": {
       "title": "Doğum tarixiniz?",
@@ -57,7 +58,8 @@
     },
     "genres": {
       "title": "Hansı musiqi xoşunuza gəlir?",
-      "subtitle": "Sevdiyiniz janrları seçin"
+      "subtitle": "Sevdiyiniz janrları seçin",
+      "minSelected": "Ən azı 3 janr seçin"
     },
     "back": "Geri",
     "continue": "Davam et",

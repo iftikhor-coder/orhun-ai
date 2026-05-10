@@ -32,7 +32,8 @@
       "username": "Username",
       "usernamePlaceholder": "Choose a username",
       "fullName": "Full name",
-      "fullNamePlaceholder": "Your full name"
+      "fullNamePlaceholder": "Your full name",
+      "uploadAvatar": "Upload photo"
     },
     "dob": {
       "title": "When were you born?",
@@ -57,7 +58,8 @@
     },
     "genres": {
       "title": "What music do you like?",
-      "subtitle": "Choose your favorite genres"
+      "subtitle": "Choose your favorite genres",
+      "minSelected": "Select at least 3 genres"
     },
     "back": "Back",
     "continue": "Continue",

@@ -32,7 +32,8 @@
       "username": "Foydalanuvchi nomi",
       "usernamePlaceholder": "Nom tanlang",
       "fullName": "To'liq ism",
-      "fullNamePlaceholder": "Sizning to'liq ismingiz"
+      "fullNamePlaceholder": "Sizning to'liq ismingiz",
+      "uploadAvatar": "Rasm yuklash"
     },
     "dob": {
       "title": "Tug'ilgan sanangiz?",
@@ -57,7 +58,8 @@
     },
     "genres": {
       "title": "Qanday musiqa yoqtirасiz?",
-      "subtitle": "Sevimli janrlaringizni tanlang"
+      "subtitle": "Sevimli janrlaringizni tanlang",
+      "minSelected": "Kamida 3 ta janr tanlang"
     },
     "back": "Orqaga",
     "continue": "Davom etish",
