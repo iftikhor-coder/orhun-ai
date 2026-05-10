@@ -1,4 +1,13 @@
 {
+  "Brand": {
+    "name": "Orhun AI",
+    "tagline": "MUSIC"
+  },
+  "Nav": {
+    "home": "Home",
+    "create": "Create",
+    "explore": "Explore"
+  },
   "Login": {
     "title": "Welcome to Orhun AI",
     "subtitle": "Music with ancient soul",
@@ -139,10 +148,24 @@
     "generic": "Something went wrong. Please try again."
   },
   "Genres": {
-    "pop": "Pop", "rock": "Rock", "hiphop": "Hip-Hop", "electronic": "Electronic",
-    "jazz": "Jazz", "classical": "Classical", "rnb": "R&B", "country": "Country",
-    "folk": "Folk", "metal": "Metal", "reggae": "Reggae", "blues": "Blues",
-    "lofi": "Lo-Fi", "ambient": "Ambient", "disco": "Disco", "funk": "Funk",
-    "house": "House", "techno": "Techno", "indie": "Indie"
+    "pop": "Pop",
+    "rock": "Rock",
+    "hiphop": "Hip-Hop",
+    "electronic": "Electronic",
+    "jazz": "Jazz",
+    "classical": "Classical",
+    "rnb": "R&B",
+    "country": "Country",
+    "folk": "Folk",
+    "metal": "Metal",
+    "reggae": "Reggae",
+    "blues": "Blues",
+    "lofi": "Lo-Fi",
+    "ambient": "Ambient",
+    "disco": "Disco",
+    "funk": "Funk",
+    "house": "House",
+    "techno": "Techno",
+    "indie": "Indie"
   }
 }

@@ -1,4 +1,13 @@
 {
+  "Brand": {
+    "name": "Orhun AI",
+    "tagline": "MUSIQI"
+  },
+  "Nav": {
+    "home": "Əsas",
+    "create": "Yarat",
+    "explore": "Kəşf"
+  },
   "Login": {
     "title": "Orhun AI'a xoş gəlmisiniz",
     "subtitle": "Qədim ruhlu musiqi",
@@ -139,10 +148,24 @@
     "generic": "Nəsə səhv getdi. Yenidən cəhd edin."
   },
   "Genres": {
-    "pop": "Pop", "rock": "Rok", "hiphop": "Hip-Hop", "electronic": "Elektronik",
-    "jazz": "Caz", "classical": "Klassik", "rnb": "R&B", "country": "Kantri",
-    "folk": "Xalq", "metal": "Metal", "reggae": "Reggae", "blues": "Blyuz",
-    "lofi": "Lo-Fi", "ambient": "Ambient", "disco": "Disko", "funk": "Fank",
-    "house": "House", "techno": "Texno", "indie": "İndi"
+    "pop": "Pop",
+    "rock": "Rok",
+    "hiphop": "Hip-Hop",
+    "electronic": "Elektronik",
+    "jazz": "Caz",
+    "classical": "Klassik",
+    "rnb": "R&B",
+    "country": "Kantri",
+    "folk": "Xalq",
+    "metal": "Metal",
+    "reggae": "Reggae",
+    "blues": "Blyuz",
+    "lofi": "Lo-Fi",
+    "ambient": "Ambient",
+    "disco": "Disko",
+    "funk": "Fank",
+    "house": "House",
+    "techno": "Texno",
+    "indie": "İndi"
   }
 }
