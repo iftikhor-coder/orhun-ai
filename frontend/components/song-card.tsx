@@ -1,22 +1,42 @@
 'use client';
 
-import { Play, Pause, MoreHorizontal, Music } from 'lucide-react';
+import { useState } from 'react';
+import { Play, Pause, Music, Globe } from 'lucide-react';
 import { usePlayerStore, Song } from '@/lib/store/player';
 import { formatDuration, cn, timeAgo } from '@/lib/utils';
+import { SongMenu } from './song-menu';
+import { LikeButton } from './like-button';
+import { SongDetailsModal } from './song-details-modal';
 
 interface SongCardProps {
   song: Song;
   showMenu?: boolean;
-  onMenuClick?: () => void;
+  showLikes?: boolean;
+  showAuthor?: boolean;
+  isOwner?: boolean;
+  onUpdate?: () => void;
   className?: string;
 }
 
-export function SongCard({ song, showMenu = true, onMenuClick, className }: SongCardProps) {
+export function SongCard({
+  song,
+  showMenu = true,
+  showLikes = true,
+  showAuthor = false,
+  isOwner = true,
+  onUpdate,
+  className,
+}: SongCardProps) {
   const { currentSong, isPlaying, setSong, togglePlay } = usePlayerStore();
+  const [detailsSong, setDetailsSong] = useState<Song | null>(null);
+  const [removed, setRemoved] = useState(false);
+  const [localPublished, setLocalPublished] = useState(song.is_published);
+
   const isCurrent = currentSong?.id === song.id;
   const isThisPlaying = isCurrent && isPlaying;
 
-  const handlePlay = () => {
+  const handlePlay = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (isCurrent) {
       togglePlay();
     } else {
@@ -24,93 +44,124 @@ export function SongCard({ song, showMenu = true, onMenuClick, className }: Song
     }
   };
 
+  const handleDelete = (id: string) => {
+    setRemoved(true);
+    setTimeout(() => onUpdate?.(), 300);
+  };
+
+  const handlePublishToggle = (id: string, isPublished: boolean) => {
+    setLocalPublished(isPublished);
+    onUpdate?.();
+  };
+
+  if (removed) return null;
+
   return (
-    <div
-      className={cn(
-        'group relative flex items-center gap-3 p-3 rounded-xl surface-card transition-all cursor-pointer',
-        isCurrent && 'border-gold-700/40',
-        className
-      )}
-    >
-      {/* Cover / Play button */}
-      <button
-        onClick={handlePlay}
+    <>
+      <div
         className={cn(
-          'relative h-14 w-14 flex-shrink-0 rounded-lg overflow-hidden',
-          'bg-gradient-gold-soft border border-gold-700/30',
-          'flex items-center justify-center',
-          'group-hover:bg-gradient-gold transition-all'
+          'group relative flex items-center gap-3 p-3 rounded-xl surface-card transition-all',
+          isCurrent && 'border-gold-700/40',
+          className
         )}
       >
-        {/* Default music icon */}
-        <Music className={cn(
-          'h-6 w-6 transition-opacity',
-          'text-gold-400 group-hover:opacity-0',
-          isThisPlaying && 'opacity-0'
-        )} />
+        {/* Play button */}
+        <button
+          onClick={handlePlay}
+          className={cn(
+            'relative h-14 w-14 flex-shrink-0 rounded-lg overflow-hidden',
+            'bg-gradient-gold-soft border border-gold-700/30',
+            'flex items-center justify-center',
+            'group-hover:bg-gradient-gold transition-all'
+          )}
+        >
+          <Music
+            className={cn(
+              'h-6 w-6 transition-opacity',
+              'text-gold-400 group-hover:opacity-0',
+              isThisPlaying && 'opacity-0'
+            )}
+          />
 
-        {/* Playing animation */}
-        {isThisPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center gap-0.5">
-            <div className="wave-bar h-4" />
-            <div className="wave-bar h-4" />
-            <div className="wave-bar h-4" />
-            <div className="wave-bar h-4" />
+          {isThisPlaying && (
+            <div className="absolute inset-0 flex items-center justify-center gap-0.5">
+              <div className="wave-bar h-4" />
+              <div className="wave-bar h-4" />
+              <div className="wave-bar h-4" />
+              <div className="wave-bar h-4" />
+            </div>
+          )}
+
+          <div
+            className={cn(
+              'absolute inset-0 flex items-center justify-center bg-midnight-950/60',
+              'opacity-0 group-hover:opacity-100 transition-opacity',
+              isThisPlaying && 'group-hover:opacity-100'
+            )}
+          >
+            {isThisPlaying ? (
+              <Pause className="h-5 w-5 text-midnight-950 fill-midnight-950" />
+            ) : (
+              <Play className="h-5 w-5 text-midnight-950 fill-midnight-950 ml-0.5" />
+            )}
           </div>
-        )}
+        </button>
 
-        {/* Hover Play/Pause */}
-        <div className={cn(
-          'absolute inset-0 flex items-center justify-center bg-midnight-950/60',
-          'opacity-0 group-hover:opacity-100 transition-opacity',
-          isThisPlaying && 'group-hover:opacity-100'
-        )}>
-          {isThisPlaying ? (
-            <Pause className="h-5 w-5 text-midnight-950 fill-midnight-950" />
-          ) : (
-            <Play className="h-5 w-5 text-midnight-950 fill-midnight-950 ml-0.5" />
-          )}
+        {/* Title + meta */}
+        <div className="flex-1 min-w-0 cursor-pointer" onClick={handlePlay}>
+          <div className="flex items-center gap-2">
+            <div
+              className={cn(
+                'text-sm font-medium truncate',
+                isCurrent ? 'text-gold-200' : 'text-gold-100'
+              )}
+            >
+              {song.title}
+            </div>
+            {localPublished && (
+              <Globe className="h-3 w-3 text-gold-500 flex-shrink-0" />
+            )}
+          </div>
+          <div className="text-xs text-gold-700 truncate flex items-center gap-2 mt-0.5">
+            <span>{formatDuration(song.duration_seconds)}</span>
+            {song.created_at && (
+              <>
+                <span>·</span>
+                <span>{timeAgo(song.created_at)}</span>
+              </>
+            )}
+            {showAuthor && song.user?.username && (
+              <>
+                <span>·</span>
+                <span className="text-gold-300/70">@{song.user.username}</span>
+              </>
+            )}
+          </div>
         </div>
-      </button>
 
-      {/* Title + meta */}
-      <div className="flex-1 min-w-0" onClick={handlePlay}>
-        <div className={cn(
-          'text-sm font-medium truncate',
-          isCurrent ? 'text-gold-200' : 'text-gold-100'
-        )}>
-          {song.title}
-        </div>
-        <div className="text-xs text-gold-700 truncate flex items-center gap-2 mt-0.5">
-          <span>{formatDuration(song.duration_seconds)}</span>
-          {song.created_at && (
-            <>
-              <span>·</span>
-              <span>{timeAgo(song.created_at)}</span>
-            </>
+        {/* Right side: like + menu */}
+        <div className="flex items-center gap-1">
+          {showLikes && (
+            <LikeButton
+              songId={song.id}
+              initialCount={(song as any).like_count || 0}
+              className="px-2 py-1.5 rounded-lg hover:bg-midnight-700/40"
+            />
           )}
-          {song.is_published === false && (
-            <>
-              <span>·</span>
-              <span className="text-gold-700/70">Private</span>
-            </>
+
+          {showMenu && (
+            <SongMenu
+              song={{ ...song, is_published: localPublished }}
+              isOwner={isOwner}
+              onDelete={handleDelete}
+              onPublishToggle={handlePublishToggle}
+              onShowDetails={(s) => setDetailsSong(s)}
+            />
           )}
         </div>
       </div>
 
-      {/* Menu button */}
-      {showMenu && (
-        <button
-          onClick={(e) => { e.stopPropagation(); onMenuClick?.(); }}
-          className={cn(
-            'h-8 w-8 rounded-lg flex items-center justify-center',
-            'text-gold-300/50 hover:text-gold-200 hover:bg-midnight-700/40',
-            'transition-all opacity-0 group-hover:opacity-100'
-          )}
-        >
-          <MoreHorizontal className="h-4 w-4" />
-        </button>
-      )}
-    </div>
+      <SongDetailsModal song={detailsSong} onClose={() => setDetailsSong(null)} />
+    </>
   );
 }

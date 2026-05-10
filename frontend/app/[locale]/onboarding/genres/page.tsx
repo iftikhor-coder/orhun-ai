@@ -34,22 +34,16 @@ export default function GenresPage() {
       try {
         const supabase = createClient();
         const { data } = await supabase.from('genres').select('*').order('id');
-        if (data) {
+        if (data && data.length > 0) {
           setGenres(data);
         } else {
-          // fallback: use translation keys
-          const fallback: Genre[] = [
-            'pop','rock','hiphop','electronic','jazz','classical','rnb','country',
-            'folk','metal','reggae','blues','lofi','ambient','disco','funk',
-            'house','techno','indie'
-          ].map((slug, i) => ({ id: i + 1, slug }));
-          setGenres(fallback);
+          throw new Error('no genres');
         }
       } catch {
         const fallback: Genre[] = [
           'pop','rock','hiphop','electronic','jazz','classical','rnb','country',
           'folk','metal','reggae','blues','lofi','ambient','disco','funk',
-          'house','techno','indie'
+          'house','techno','indie',
         ].map((slug, i) => ({ id: i + 1, slug }));
         setGenres(fallback);
       } finally {
@@ -60,22 +54,19 @@ export default function GenresPage() {
   }, []);
 
   const toggleGenre = (id: number) => {
-    setSelected(prev => {
+    setSelected((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   };
 
   const getGenreName = (g: Genre) => {
     const keyMap: Record<string, string> = {
-      en: 'name_en', uz: 'name_uz', az: 'name_az', tr: 'name_tr'
+      en: 'name_en', uz: 'name_uz', az: 'name_az', tr: 'name_tr',
     };
-    return (g as any)[keyMap[locale]] || tg(g.slug);
+    return (g as any)[keyMap[locale]] || tg(g.slug as any);
   };
 
   const handleFinish = async () => {
@@ -85,13 +76,18 @@ export default function GenresPage() {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // Save selected genres
         await supabase.from('user_genres').delete().eq('user_id', user.id);
-        const rows = Array.from(selected).map(genre_id => ({
+        const rows = Array.from(selected).map((genre_id) => ({
           user_id: user.id,
           genre_id,
         }));
         await supabase.from('user_genres').insert(rows);
+
+        // ⭐ Mark onboarding completed
+        await supabase
+          .from('profiles')
+          .update({ onboarding_completed: true })
+          .eq('id', user.id);
       }
       router.push(`/${locale}/home`);
     } catch (e) {

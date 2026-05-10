@@ -8,22 +8,26 @@ import { Sidebar } from '@/components/sidebar';
 import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
 import { Song } from '@/lib/store/player';
+import { cn } from '@/lib/utils';
 
 export default function ExplorePage() {
   const t = useTranslations('Explore');
   const [songs, setSongs] = useState<Song[]>([]);
-  const [filter, setFilter] = useState<'all' | 'trending' | 'newest'>('newest');
+  const [filter, setFilter] = useState<'newest' | 'trending'>('newest');
 
   useEffect(() => {
     const load = async () => {
       const supabase = createClient();
-      const { data } = await supabase
+      let query = supabase
         .from('songs')
         .select('*')
-        .eq('is_published', true)
-        .eq('is_ready', true)
-        .order('created_at', { ascending: false })
-        .limit(50);
+        .eq('is_published', true);
+
+      query = filter === 'trending'
+        ? query.order('like_count', { ascending: false })
+        : query.order('created_at', { ascending: false });
+
+      const { data } = await query.limit(50);
       if (data) setSongs(data as Song[]);
     };
     load();
@@ -48,31 +52,31 @@ export default function ExplorePage() {
             <p className="text-sm text-gold-300/60">{t('subtitle')}</p>
           </div>
 
-          {/* Filters */}
           <div className="flex gap-2 mb-6">
             {[
               { key: 'newest', label: t('newest') },
               { key: 'trending', label: t('trending') },
-              { key: 'all', label: t('filterAll') },
-            ].map(f => (
+            ].map((f) => (
               <button
                 key={f.key}
                 onClick={() => setFilter(f.key as any)}
-                className={
+                className={cn(
+                  'px-4 py-2 rounded-lg text-sm font-medium transition-all',
                   filter === f.key
-                    ? 'px-4 py-2 rounded-lg text-sm font-medium bg-gradient-gold text-midnight-950'
-                    : 'px-4 py-2 rounded-lg text-sm font-medium bg-midnight-700/40 text-gold-300/70 hover:bg-midnight-600/40 border border-gold-900/30'
-                }
+                    ? 'bg-gradient-gold text-midnight-950'
+                    : 'bg-midnight-700/40 text-gold-300/70 hover:bg-midnight-600/40 border border-gold-900/30'
+                )}
               >
                 {f.label}
               </button>
             ))}
           </div>
 
-          {/* Feed */}
           {songs.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {songs.map(song => <SongCard key={song.id} song={song} showMenu={false} />)}
+              {songs.map((song) => (
+                <SongCard key={song.id} song={song} isOwner={false} showAuthor />
+              ))}
             </div>
           ) : (
             <div className="surface-card rounded-2xl p-16 text-center">

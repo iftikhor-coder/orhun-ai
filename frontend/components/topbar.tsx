@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { Sparkles, LogOut, User as UserIcon } from 'lucide-react';
+import { Sparkles, LogOut, Clock } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { LanguageSwitcher } from './language-switcher';
 import { Logo } from './logo';
@@ -15,27 +15,71 @@ export function TopBar() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [credits, setCredits] = useState<number>(4);
+  const [resetAt, setResetAt] = useState<Date | null>(null);
+  const [resetIn, setResetIn] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
       const supabase = createClient();
       const { data: { user: u } } = await supabase.auth.getUser();
-      if (u) {
-        setUser(u);
-        // Try to load profile
+      if (!u) return;
+      setUser(u);
+
+      // Refresh credits if reset is due, then read latest
+      try {
+        const { data } = await supabase.rpc('refresh_credits_if_due', { p_user_id: u.id });
+        if (data) {
+          setCredits(data.credits_remaining ?? 4);
+          if (data.reset_at) setResetAt(new Date(data.reset_at));
+        }
+      } catch {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('credits_remaining')
+          .select('credits_remaining, credits_reset_at')
           .eq('id', u.id)
-          .single();
-        if (profile?.credits_remaining !== undefined) {
-          setCredits(profile.credits_remaining);
+          .maybeSingle();
+        if (profile) {
+          setCredits(profile.credits_remaining ?? 4);
+          if (profile.credits_reset_at) setResetAt(new Date(profile.credits_reset_at));
         }
       }
     };
     load();
+
+    // Listen for credit updates
+    const handler = (e: any) => {
+      if (typeof e.detail?.credits_remaining === 'number') {
+        setCredits(e.detail.credits_remaining);
+      }
+      if (e.detail?.reset_at) {
+        setResetAt(new Date(e.detail.reset_at));
+      }
+    };
+    window.addEventListener('orhun:credits-updated', handler as any);
+    return () => window.removeEventListener('orhun:credits-updated', handler as any);
   }, []);
+
+  // Live countdown
+  useEffect(() => {
+    if (!resetAt || credits > 0) {
+      setResetIn('');
+      return;
+    }
+    const update = () => {
+      const ms = resetAt.getTime() - Date.now();
+      if (ms <= 0) {
+        setResetIn('');
+        return;
+      }
+      const h = Math.floor(ms / 3_600_000);
+      const m = Math.floor((ms % 3_600_000) / 60_000);
+      setResetIn(`${h}h ${m}m`);
+    };
+    update();
+    const id = setInterval(update, 30_000);
+    return () => clearInterval(id);
+  }, [resetAt, credits]);
 
   const handleSignOut = async () => {
     const supabase = createClient();
@@ -46,29 +90,38 @@ export function TopBar() {
   return (
     <header className="sticky top-0 z-40 surface-glass border-b border-gold-900/20">
       <div className="flex items-center justify-between px-6 lg:px-8 py-4">
-        {/* Mobile logo (hidden on desktop where sidebar shows it) */}
         <div className="lg:hidden">
           <Logo size="sm" />
         </div>
-
-        {/* Desktop spacer */}
         <div className="hidden lg:block" />
 
-        {/* Right side */}
         <div className="flex items-center gap-3">
           {/* Credits badge */}
-          <div className={cn(
-            'hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg',
-            'bg-gradient-gold-soft border border-gold-700/30',
-            'text-sm text-gold-200'
-          )}>
-            <Sparkles className="h-3.5 w-3.5 text-gold-400" />
-            <span className="font-medium">{t('credits', { count: credits })}</span>
+          <div
+            className={cn(
+              'flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm',
+              credits > 0
+                ? 'bg-gradient-gold-soft border border-gold-700/30 text-gold-200'
+                : 'bg-amber-950/30 border border-amber-700/40 text-amber-200'
+            )}
+          >
+            {credits > 0 ? (
+              <>
+                <Sparkles className="h-3.5 w-3.5 text-gold-400" />
+                <span className="font-medium">{t('credits', { count: credits })}</span>
+              </>
+            ) : (
+              <>
+                <Clock className="h-3.5 w-3.5 text-amber-400" />
+                <span className="font-medium">
+                  {resetIn ? `${resetIn}` : t('credits', { count: 0 })}
+                </span>
+              </>
+            )}
           </div>
 
           <LanguageSwitcher />
 
-          {/* User avatar */}
           {user && (
             <div className="relative">
               <button

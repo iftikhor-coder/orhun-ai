@@ -19,49 +19,51 @@ export default function HomePage() {
   const [user, setUser] = useState<any>(null);
   const [mySongs, setMySongs] = useState<Song[]>([]);
   const [exploreSongs, setExploreSongs] = useState<Song[]>([]);
+  const [tick, setTick] = useState(0);
 
   const timeOfDay = getTimeOfDay();
-  const greeting = timeOfDay === 'morning' ? t('greetingMorning') : timeOfDay === 'day' ? t('greetingDay') : t('greetingEvening');
+  const greeting =
+    timeOfDay === 'morning' ? t('greetingMorning') :
+    timeOfDay === 'day' ? t('greetingDay') :
+    t('greetingEvening');
 
   useEffect(() => {
     const load = async () => {
       const supabase = createClient();
       const { data: { user: u } } = await supabase.auth.getUser();
       setUser(u);
+      if (!u) return;
 
-      if (u) {
-        // Load my recent songs (max 4)
-        const { data: my } = await supabase
-          .from('songs')
-          .select('*')
-          .eq('user_id', u.id)
-          .eq('is_ready', true)
-          .order('created_at', { ascending: false })
-          .limit(4);
-        if (my) setMySongs(my as Song[]);
+      // My recent songs (no is_ready filter — show all)
+      const { data: my } = await supabase
+        .from('songs')
+        .select('*')
+        .eq('user_id', u.id)
+        .order('created_at', { ascending: false })
+        .limit(4);
+      if (my) setMySongs(my as Song[]);
 
-        // Load published songs from community
-        const { data: pub } = await supabase
-          .from('songs')
-          .select('*')
-          .eq('is_published', true)
-          .eq('is_ready', true)
-          .order('created_at', { ascending: false })
-          .limit(6);
-        if (pub) setExploreSongs(pub as Song[]);
-      }
+      // Community feed
+      const { data: pub } = await supabase
+        .from('songs')
+        .select('*')
+        .eq('is_published', true)
+        .order('created_at', { ascending: false })
+        .limit(6);
+      if (pub) setExploreSongs(pub as Song[]);
     };
     load();
-  }, []);
+  }, [tick]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (prompt.trim().length < 3) return;
-    // Pass prompt to create page via query
     router.push(`/${locale}/create?prompt=${encodeURIComponent(prompt)}`);
   };
 
-  const userName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || '';
+  const userName =
+    user?.user_metadata?.full_name?.split(' ')[0] ||
+    user?.email?.split('@')[0] || '';
 
   return (
     <div className="flex min-h-screen relative">
@@ -74,7 +76,6 @@ export default function HomePage() {
         <TopBar />
 
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8 lg:py-12">
-          {/* Greeting */}
           <div className="mb-10 animate-fade-in-up">
             <h1 className="font-display text-4xl sm:text-5xl font-light text-gold-100 mb-2">
               {greeting}{userName && `, ${userName}`}
@@ -82,7 +83,6 @@ export default function HomePage() {
             <p className="text-gold-300/60 text-base sm:text-lg">{t('promptHint')}</p>
           </div>
 
-          {/* Main create input */}
           <form onSubmit={handleSubmit} className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-gold rounded-2xl opacity-30 blur" />
@@ -114,7 +114,6 @@ export default function HomePage() {
             </div>
           </form>
 
-          {/* My library preview */}
           {mySongs.length > 0 && (
             <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <div className="flex items-center justify-between mb-4">
@@ -127,12 +126,17 @@ export default function HomePage() {
                 </button>
               </div>
               <div className="grid sm:grid-cols-2 gap-3">
-                {mySongs.map(song => <SongCard key={song.id} song={song} />)}
+                {mySongs.map((song) => (
+                  <SongCard
+                    key={song.id}
+                    song={song}
+                    onUpdate={() => setTick((t) => t + 1)}
+                  />
+                ))}
               </div>
             </section>
           )}
 
-          {/* Explore */}
           <section className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -152,7 +156,9 @@ export default function HomePage() {
 
             {exploreSongs.length > 0 ? (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {exploreSongs.map(song => <SongCard key={song.id} song={song} showMenu={false} />)}
+                {exploreSongs.map((song) => (
+                  <SongCard key={song.id} song={song} isOwner={false} showAuthor />
+                ))}
               </div>
             ) : (
               <div className="surface-card rounded-xl p-12 text-center">

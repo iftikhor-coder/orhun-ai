@@ -3,14 +3,17 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Sparkles, Mic, MicOff, User, Users, Loader2, Music, Wand2, AlertCircle } from 'lucide-react';
+import {
+  Sparkles, User, Users, Loader2, Music, Wand2, AlertCircle, Wand,
+} from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { Sidebar } from '@/components/sidebar';
 import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
 import { GenrePill } from '@/components/genre-pill';
 import { Song, usePlayerStore } from '@/lib/store/player';
-import { generateSong } from '@/lib/api';
+import { generateSong, GenerateError, VoiceType } from '@/lib/api';
+import { useNotifications } from '@/lib/store/notifications';
 import { cn } from '@/lib/utils';
 
 interface Genre {
@@ -25,42 +28,56 @@ interface Genre {
 function CreateContent() {
   const t = useTranslations('Create');
   const tg = useTranslations('Genres');
+  const tn = useTranslations('Notify');
   const tErr = useTranslations('Errors');
   const locale = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setSong } = usePlayerStore();
+  const { notify } = useNotifications();
 
   const [prompt, setPrompt] = useState(searchParams.get('prompt') || '');
   const [lyrics, setLyrics] = useState('');
-  const [instrumental, setInstrumental] = useState(false);
-  const [voiceType, setVoiceType] = useState<'male' | 'female' | 'instrumental'>('female');
+  const [voiceType, setVoiceType] = useState<VoiceType>('female');
   const [duration, setDuration] = useState<60 | 120 | 240>(60);
   const [selectedGenres, setSelectedGenres] = useState<Set<number>>(new Set());
   const [genres, setGenres] = useState<Genre[]>([]);
 
   const [generating, setGenerating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [mySongs, setMySongs] = useState<Song[]>([]);
   const [credits, setCredits] = useState<number>(4);
+  const [resetAt, setResetAt] = useState<Date | null>(null);
+  const [refreshTick, setRefreshTick] = useState(0);
+
+  const reload = async () => {
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { data: songs } = await supabase
+      .from('songs')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false });
+    if (songs) setMySongs(songs as Song[]);
+  };
 
   useEffect(() => {
     const load = async () => {
       const supabase = createClient();
 
-      // Load genres
       const { data: g } = await supabase.from('genres').select('*').order('id');
-      if (g) setGenres(g);
-      else {
+      if (g && g.length > 0) {
+        setGenres(g);
+      } else {
         const fallback: Genre[] = [
           'pop','rock','hiphop','electronic','jazz','classical','rnb','country',
           'folk','metal','reggae','blues','lofi','ambient','disco','funk',
-          'house','techno','indie'
+          'house','techno','indie',
         ].map((slug, i) => ({ id: i + 1, slug }));
         setGenres(fallback);
       }
 
-      // Load my songs
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const { data: songs } = await supabase
@@ -70,25 +87,30 @@ function CreateContent() {
           .order('created_at', { ascending: false });
         if (songs) setMySongs(songs as Song[]);
 
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('credits_remaining')
-          .eq('id', user.id)
-          .single();
-        if (profile?.credits_remaining !== undefined) setCredits(profile.credits_remaining);
+        try {
+          const { data: cr } = await supabase.rpc('refresh_credits_if_due', { p_user_id: user.id });
+          if (cr) {
+            setCredits(cr.credits_remaining ?? 4);
+            if (cr.reset_at) setResetAt(new Date(cr.reset_at));
+          }
+        } catch {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('credits_remaining, credits_reset_at')
+            .eq('id', user.id)
+            .maybeSingle();
+          if (profile) {
+            setCredits(profile.credits_remaining ?? 4);
+            if (profile.credits_reset_at) setResetAt(new Date(profile.credits_reset_at));
+          }
+        }
       }
     };
     load();
-  }, []);
-
-  // When instrumental toggles, sync voice
-  useEffect(() => {
-    if (instrumental) setVoiceType('instrumental');
-    else if (voiceType === 'instrumental') setVoiceType('female');
-  }, [instrumental]);
+  }, [refreshTick]);
 
   const toggleGenre = (id: number) => {
-    setSelectedGenres(prev => {
+    setSelectedGenres((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else if (next.size < 3) next.add(id);
@@ -98,29 +120,39 @@ function CreateContent() {
 
   const getGenreName = (g: Genre) => {
     const keyMap: Record<string, string> = {
-      en: 'name_en', uz: 'name_uz', az: 'name_az', tr: 'name_tr'
+      en: 'name_en', uz: 'name_uz', az: 'name_az', tr: 'name_tr',
     };
-    return (g as any)[keyMap[locale]] || tg(g.slug);
+    return (g as any)[keyMap[locale]] || tg(g.slug as any);
   };
 
   const handleGenerate = async () => {
-    setError(null);
     if (prompt.trim().length < 3) {
-      setError(tErr('promptTooShort'));
+      notify({ type: 'warning', title: tErr('promptTooShort') });
       return;
     }
     if (credits <= 0) {
-      setError(tErr('noCredits'));
+      notify({
+        type: 'warning',
+        title: tn('noCreditsTitle'),
+        message: resetAt ? tn('noCreditsResetIn', { hours: hoursUntil(resetAt) }) : tErr('noCredits'),
+      });
       return;
     }
 
     setGenerating(true);
     try {
       const genreNames = Array.from(selectedGenres)
-        .map(id => genres.find(g => g.id === id))
+        .map((id) => genres.find((g) => g.id === id))
         .filter(Boolean)
-        .map(g => g!.slug)
+        .map((g) => g!.slug)
         .join(', ');
+
+      notify({
+        type: 'info',
+        title: tn('generatingTitle'),
+        message: tn('generatingMessage'),
+        duration: 4000,
+      });
 
       const result = await generateSong({
         prompt: prompt.trim(),
@@ -130,10 +162,16 @@ function CreateContent() {
         duration,
       });
 
-      // Add to my songs list
-      const newSong: Song = {
+      // Update local state
+      setCredits(result.credits_remaining);
+
+      // Reload songs from DB to get fresh data
+      await reload();
+
+      // Auto-play
+      const playable: Song = {
         id: result.song_id,
-        title: prompt.slice(0, 50),
+        title: prompt.slice(0, 60),
         prompt: result.prompt,
         lyrics,
         audio_url: result.audio_url,
@@ -142,17 +180,35 @@ function CreateContent() {
         is_published: false,
         created_at: new Date().toISOString(),
       };
+      setSong(playable);
 
-      setMySongs(prev => [newSong, ...prev]);
-      setSong(newSong); // auto-play
-      setCredits(c => Math.max(0, c - 1));
+      notify({
+        type: 'success',
+        title: tn('successTitle'),
+        message: tn('successMessage', { credits: result.credits_remaining }),
+      });
 
       // Clear form
       setPrompt('');
       setLyrics('');
       setSelectedGenres(new Set());
     } catch (e: any) {
-      setError(e.message || tErr('generic'));
+      if (e instanceof GenerateError && e.noCredits) {
+        const reset = e.resetAt ? new Date(e.resetAt) : null;
+        if (reset) setResetAt(reset);
+        setCredits(0);
+        notify({
+          type: 'warning',
+          title: tn('noCreditsTitle'),
+          message: reset ? tn('noCreditsResetIn', { hours: hoursUntil(reset) }) : tErr('noCredits'),
+        });
+      } else {
+        notify({
+          type: 'error',
+          title: tn('errorTitle'),
+          message: e.message || tErr('generic'),
+        });
+      }
     } finally {
       setGenerating(false);
     }
@@ -171,13 +227,11 @@ function CreateContent() {
         <TopBar />
 
         <div className="px-4 lg:px-8 py-8">
-          {/* Header */}
           <div className="mb-6 animate-fade-in-up">
             <h1 className="font-display text-4xl text-gold-100 mb-1">{t('title')}</h1>
             <p className="text-sm text-gold-300/60">{t('subtitle')}</p>
           </div>
 
-          {/* Two-column layout */}
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Left: form */}
             <div className="space-y-5 animate-fade-in-up" style={{ animationDelay: '0.05s' }}>
@@ -195,52 +249,53 @@ function CreateContent() {
                 />
               </div>
 
-              {/* Voice type */}
+              {/* Voice type — 4 options including Turkic Aura */}
               <div className="surface-glass-bright rounded-2xl p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <label className="text-xs uppercase tracking-wider text-gold-300/70">
-                    {t('voice')}
-                  </label>
-                  <label className="flex items-center gap-2 text-xs text-gold-300/70 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={instrumental}
-                      onChange={(e) => setInstrumental(e.target.checked)}
-                      className="accent-gold-500"
-                    />
-                    {t('instrumental')}
-                  </label>
-                </div>
-                <div className={cn('grid grid-cols-2 gap-2', instrumental && 'opacity-40 pointer-events-none')}>
-                  <button
+                <label className="block text-xs uppercase tracking-wider text-gold-300/70 mb-3">
+                  {t('voice')}
+                </label>
+                <div className="grid grid-cols-2 gap-2 mb-2">
+                  <VoiceButton
+                    icon={User}
+                    label={t('voiceMan')}
+                    active={voiceType === 'male'}
                     onClick={() => setVoiceType('male')}
-                    className={cn(
-                      'flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all',
-                      voiceType === 'male'
-                        ? 'bg-gradient-gold-soft border-gold-700/50 text-gold-200'
-                        : 'bg-midnight-800/40 border-gold-900/30 text-gold-300/70 hover:bg-midnight-700/40'
-                    )}
-                  >
-                    <User className="h-4 w-4" />
-                    {t('voiceMan')}
-                  </button>
-                  <button
+                  />
+                  <VoiceButton
+                    icon={Users}
+                    label={t('voiceWoman')}
+                    active={voiceType === 'female'}
                     onClick={() => setVoiceType('female')}
+                  />
+                  <VoiceButton
+                    icon={Music}
+                    label={t('voiceInstrumental')}
+                    active={voiceType === 'instrumental'}
+                    onClick={() => setVoiceType('instrumental')}
+                  />
+                  <button
+                    onClick={() => setVoiceType('turkic_aura')}
                     className={cn(
-                      'flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all',
-                      voiceType === 'female'
-                        ? 'bg-gradient-gold-soft border-gold-700/50 text-gold-200'
-                        : 'bg-midnight-800/40 border-gold-900/30 text-gold-300/70 hover:bg-midnight-700/40'
+                      'flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all relative overflow-hidden',
+                      voiceType === 'turkic_aura'
+                        ? 'bg-gradient-gold text-midnight-950 border-transparent font-semibold shadow-lg shadow-gold-900/40'
+                        : 'bg-gradient-gold-soft border-gold-700/40 text-gold-200 hover:bg-midnight-600/40'
                     )}
                   >
-                    <Users className="h-4 w-4" />
-                    {t('voiceWoman')}
+                    <Wand className="h-4 w-4" />
+                    <span>Turkic Aura</span>
+                    <span className="text-xs opacity-70">✦</span>
                   </button>
                 </div>
+                {voiceType === 'turkic_aura' && (
+                  <div className="text-xs text-gold-300/60 italic mt-2 px-1">
+                    {t('turkicAuraHint')}
+                  </div>
+                )}
               </div>
 
               {/* Lyrics */}
-              {!instrumental && (
+              {voiceType !== 'instrumental' && (
                 <div className="surface-glass-bright rounded-2xl p-5">
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs uppercase tracking-wider text-gold-300/70">
@@ -291,7 +346,7 @@ function CreateContent() {
                     { val: 60, label: t('durationShort') },
                     { val: 120, label: t('durationMedium') },
                     { val: 240, label: t('durationLong') },
-                  ].map(opt => (
+                  ].map((opt) => (
                     <button
                       key={opt.val}
                       onClick={() => setDuration(opt.val as 60 | 120 | 240)}
@@ -307,14 +362,6 @@ function CreateContent() {
                   ))}
                 </div>
               </div>
-
-              {/* Error */}
-              {error && (
-                <div className="flex items-center gap-2 text-sm text-red-400/90 bg-red-950/30 border border-red-900/40 rounded-xl px-4 py-3">
-                  <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                  {error}
-                </div>
-              )}
 
               {/* Generate button */}
               <button
@@ -379,7 +426,9 @@ function CreateContent() {
 
                 {mySongs.length > 0 ? (
                   <div className="space-y-2">
-                    {mySongs.map(song => <SongCard key={song.id} song={song} />)}
+                    {mySongs.map((song) => (
+                      <SongCard key={song.id} song={song} onUpdate={() => setRefreshTick((t) => t + 1)} />
+                    ))}
                   </div>
                 ) : !generating ? (
                   <div className="text-center py-12">
@@ -395,6 +444,28 @@ function CreateContent() {
       </main>
     </div>
   );
+}
+
+function VoiceButton({ icon: Icon, label, active, onClick }: any) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        'flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all',
+        active
+          ? 'bg-gradient-gold-soft border-gold-700/50 text-gold-200'
+          : 'bg-midnight-800/40 border-gold-900/30 text-gold-300/70 hover:bg-midnight-700/40'
+      )}
+    >
+      <Icon className="h-4 w-4" />
+      {label}
+    </button>
+  );
+}
+
+function hoursUntil(date: Date): number {
+  const ms = date.getTime() - Date.now();
+  return Math.max(1, Math.ceil(ms / 3_600_000));
 }
 
 export default function CreatePage() {
