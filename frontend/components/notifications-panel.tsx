@@ -83,10 +83,11 @@ export function NotificationsPanel() {
       className={cn(
         'absolute right-0 top-full mt-2',
         'w-[380px] max-w-[calc(100vw-2rem)]',
-        'surface-glass-bright rounded-2xl',
-        'shadow-2xl shadow-black/60',
-        'z-50 animate-fade-in',
-        'border border-gold-900/30 overflow-hidden'
+        'rounded-2xl',
+        'shadow-2xl shadow-black/80',
+        'z-[9999] animate-fade-in',
+        'border border-gold-900/40 overflow-hidden',
+        'bg-midnight-950/98 backdrop-blur-xl'
       )}
     >
       {/* Header */}

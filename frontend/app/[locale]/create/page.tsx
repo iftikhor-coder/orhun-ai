@@ -12,9 +12,10 @@ import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
 import { SongsPanel } from '@/components/songs-panel';
 import { InstrumentsPicker } from '@/components/instruments-picker';
+import { StyleModePicker } from '@/components/style-mode-picker';
 import { GenrePill } from '@/components/genre-pill';
 import { Song, usePlayerStore } from '@/lib/store/player';
-import { generateSong, GenerateError, VoiceType, Instrument } from '@/lib/api';
+import { generateSong, GenerateError, VoiceType, StyleMode, Instrument } from '@/lib/api';
 import { useNotifications } from '@/lib/store/notifications';
 import { cn } from '@/lib/utils';
 
@@ -41,6 +42,7 @@ function CreateContent() {
   const [prompt, setPrompt] = useState(searchParams.get('prompt') || '');
   const [lyrics, setLyrics] = useState('');
   const [voiceType, setVoiceType] = useState<VoiceType>('female');
+  const [styleMode, setStyleMode] = useState<StyleMode>('standard');
   const [selectedInstruments, setSelectedInstruments] = useState<Set<Instrument>>(new Set());
   const [duration, setDuration] = useState<60 | 120 | 240>(60);
   const [selectedGenres, setSelectedGenres] = useState<Set<number>>(new Set());
@@ -162,6 +164,7 @@ function CreateContent() {
         lyrics: lyrics.trim() || undefined,
         genres: genreNames || undefined,
         voice_type: voiceType,
+        style_mode: styleMode,
         duration,
         instruments: selectedInstruments.size > 0
           ? Array.from(selectedInstruments)
@@ -188,6 +191,7 @@ function CreateContent() {
       setLyrics('');
       setSelectedGenres(new Set());
       setSelectedInstruments(new Set());
+      setStyleMode('standard');
     } catch (e: any) {
       if (e instanceof GenerateError && e.noCredits) {
         const reset = e.resetAt ? new Date(e.resetAt) : null;
@@ -245,12 +249,12 @@ function CreateContent() {
                 />
               </div>
 
-              {/* Voice type — 5 options including Turkic Aura + Turkic Fusion */}
+              {/* Voice — 3 options: who sings */}
               <div className="surface-glass-bright rounded-2xl p-5">
                 <label className="block text-xs uppercase tracking-wider text-gold-300/70 mb-3">
                   {t('voice')}
                 </label>
-                <div className="grid grid-cols-2 gap-2 mb-2">
+                <div className="grid grid-cols-3 gap-2">
                   <VoiceButton
                     icon={User}
                     label={t('voiceMan')}
@@ -269,44 +273,16 @@ function CreateContent() {
                     active={voiceType === 'instrumental'}
                     onClick={() => setVoiceType('instrumental')}
                   />
-                  <button
-                    onClick={() => setVoiceType('turkic_aura')}
-                    className={cn(
-                      'flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all relative overflow-hidden',
-                      voiceType === 'turkic_aura'
-                        ? 'bg-gradient-gold text-midnight-950 border-transparent font-semibold shadow-lg shadow-gold-900/40'
-                        : 'bg-gradient-gold-soft border-gold-700/40 text-gold-200 hover:bg-midnight-600/40'
-                    )}
-                  >
-                    <Wand className="h-4 w-4" />
-                    <span>Turkic Aura</span>
-                    <span className="text-xs opacity-70">✦</span>
-                  </button>
-                  <button
-                    onClick={() => setVoiceType('turkic_fusion')}
-                    className={cn(
-                      'col-span-2 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all relative overflow-hidden',
-                      voiceType === 'turkic_fusion'
-                        ? 'bg-gradient-to-r from-purple-700 via-gold-500 to-amber-600 text-midnight-950 border-transparent font-semibold shadow-lg shadow-purple-900/40'
-                        : 'bg-gradient-to-r from-purple-900/30 via-gold-900/30 to-amber-900/30 border-purple-700/40 text-gold-200 hover:from-purple-800/40 hover:to-amber-800/40'
-                    )}
-                  >
-                    <span className="text-base">🌍</span>
-                    <span>Turkic Fusion</span>
-                    <span className="text-xs opacity-70">✨</span>
-                  </button>
                 </div>
-                {voiceType === 'turkic_aura' && (
-                  <div className="text-xs text-gold-300/60 italic mt-2 px-1">
-                    {t('turkicAuraHint')}
-                  </div>
-                )}
-                {voiceType === 'turkic_fusion' && (
-                  <div className="text-xs text-gold-300/60 italic mt-2 px-1">
-                    {t('turkicFusionHint')}
-                  </div>
-                )}
               </div>
+
+              {/* Style Mode — independent from voice */}
+              <StyleModePicker
+                value={styleMode}
+                onChange={setStyleMode}
+                disabled={generating}
+                className="surface-glass-bright"
+              />
 
               {/* Instruments — optional multi-select */}
               <InstrumentsPicker

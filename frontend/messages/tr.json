@@ -308,5 +308,17 @@
     "ney": "Ney",
     "kemence": "Kemençe",
     "davul": "Davul"
+  },
+  "StyleMode": {
+    "title": "Stil Modu",
+    "modes": {
+      "standard": "Standart",
+      "turkic_aura": "Turkic Aura ✦",
+      "turkic_fusion": "Turkic Fusion 🌍"
+    },
+    "hints": {
+      "turkic_aura": "Saf kadim Türk folk — geleneksel enstrümanlar ve mistik atmosfer",
+      "turkic_fusion": "Doğu Batı buluşması — Türk enstrümanları + modern prodüksiyon"
+    }
   }
 }

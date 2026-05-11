@@ -308,5 +308,17 @@
     "ney": "Nay",
     "kemence": "Kemencha",
     "davul": "Davul"
+  },
+  "StyleMode": {
+    "title": "Uslub rejimi",
+    "modes": {
+      "standard": "Oddiy",
+      "turkic_aura": "Turkic Aura ✦",
+      "turkic_fusion": "Turkic Fusion 🌍"
+    },
+    "hints": {
+      "turkic_aura": "Toza qadimiy turkiy folk — an'anaviy cholg'ular va sirli ohang",
+      "turkic_fusion": "Sharq va G'arb birlashmasi — turk cholg'ulari + zamonaviy production"
+    }
   }
 }

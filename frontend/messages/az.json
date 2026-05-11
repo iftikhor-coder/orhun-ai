@@ -308,5 +308,17 @@
     "ney": "Ney",
     "kemence": "Kamança",
     "davul": "Davul"
+  },
+  "StyleMode": {
+    "title": "Üslub rejimi",
+    "modes": {
+      "standard": "Standart",
+      "turkic_aura": "Turkic Aura ✦",
+      "turkic_fusion": "Turkic Fusion 🌍"
+    },
+    "hints": {
+      "turkic_aura": "Saf qədim türk folk — ənənəvi alətlər və mistik atmosfer",
+      "turkic_fusion": "Şərq və Qərb birləşməsi — türk alətləri + müasir prodüksiya"
+    }
   }
 }

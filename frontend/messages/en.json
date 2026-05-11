@@ -308,5 +308,17 @@
     "ney": "Ney",
     "kemence": "Kemence",
     "davul": "Davul"
+  },
+  "StyleMode": {
+    "title": "Style Mode",
+    "modes": {
+      "standard": "Standard",
+      "turkic_aura": "Turkic Aura ✦",
+      "turkic_fusion": "Turkic Fusion 🌍"
+    },
+    "hints": {
+      "turkic_aura": "Pure ancient Turkic folk — traditional instruments and mystical atmosphere",
+      "turkic_fusion": "East meets West — Turkish instruments blended with modern production"
+    }
   }
 }
