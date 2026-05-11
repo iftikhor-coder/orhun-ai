@@ -11,9 +11,10 @@ import { Sidebar } from '@/components/sidebar';
 import { TopBar } from '@/components/topbar';
 import { SongCard } from '@/components/song-card';
 import { SongsPanel } from '@/components/songs-panel';
+import { InstrumentsPicker } from '@/components/instruments-picker';
 import { GenrePill } from '@/components/genre-pill';
 import { Song, usePlayerStore } from '@/lib/store/player';
-import { generateSong, GenerateError, VoiceType } from '@/lib/api';
+import { generateSong, GenerateError, VoiceType, Instrument } from '@/lib/api';
 import { useNotifications } from '@/lib/store/notifications';
 import { cn } from '@/lib/utils';
 
@@ -40,6 +41,7 @@ function CreateContent() {
   const [prompt, setPrompt] = useState(searchParams.get('prompt') || '');
   const [lyrics, setLyrics] = useState('');
   const [voiceType, setVoiceType] = useState<VoiceType>('female');
+  const [selectedInstruments, setSelectedInstruments] = useState<Set<Instrument>>(new Set());
   const [duration, setDuration] = useState<60 | 120 | 240>(60);
   const [selectedGenres, setSelectedGenres] = useState<Set<number>>(new Set());
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -161,6 +163,9 @@ function CreateContent() {
         genres: genreNames || undefined,
         voice_type: voiceType,
         duration,
+        instruments: selectedInstruments.size > 0
+          ? Array.from(selectedInstruments)
+          : undefined,
       });
 
       // Update credits immediately
@@ -182,6 +187,7 @@ function CreateContent() {
       setPrompt('');
       setLyrics('');
       setSelectedGenres(new Set());
+      setSelectedInstruments(new Set());
     } catch (e: any) {
       if (e instanceof GenerateError && e.noCredits) {
         const reset = e.resetAt ? new Date(e.resetAt) : null;
@@ -239,7 +245,7 @@ function CreateContent() {
                 />
               </div>
 
-              {/* Voice type — 4 options including Turkic Aura */}
+              {/* Voice type — 5 options including Turkic Aura + Turkic Fusion */}
               <div className="surface-glass-bright rounded-2xl p-5">
                 <label className="block text-xs uppercase tracking-wider text-gold-300/70 mb-3">
                   {t('voice')}
@@ -276,13 +282,39 @@ function CreateContent() {
                     <span>Turkic Aura</span>
                     <span className="text-xs opacity-70">✦</span>
                   </button>
+                  <button
+                    onClick={() => setVoiceType('turkic_fusion')}
+                    className={cn(
+                      'col-span-2 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all relative overflow-hidden',
+                      voiceType === 'turkic_fusion'
+                        ? 'bg-gradient-to-r from-purple-700 via-gold-500 to-amber-600 text-midnight-950 border-transparent font-semibold shadow-lg shadow-purple-900/40'
+                        : 'bg-gradient-to-r from-purple-900/30 via-gold-900/30 to-amber-900/30 border-purple-700/40 text-gold-200 hover:from-purple-800/40 hover:to-amber-800/40'
+                    )}
+                  >
+                    <span className="text-base">🌍</span>
+                    <span>Turkic Fusion</span>
+                    <span className="text-xs opacity-70">✨</span>
+                  </button>
                 </div>
                 {voiceType === 'turkic_aura' && (
                   <div className="text-xs text-gold-300/60 italic mt-2 px-1">
                     {t('turkicAuraHint')}
                   </div>
                 )}
+                {voiceType === 'turkic_fusion' && (
+                  <div className="text-xs text-gold-300/60 italic mt-2 px-1">
+                    {t('turkicFusionHint')}
+                  </div>
+                )}
               </div>
+
+              {/* Instruments — optional multi-select */}
+              <InstrumentsPicker
+                selected={selectedInstruments}
+                onChange={setSelectedInstruments}
+                disabled={generating}
+                className="surface-glass-bright"
+              />
 
               {/* Lyrics */}
               {voiceType !== 'instrumental' && (

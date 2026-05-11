@@ -110,7 +110,8 @@
     "creditsRequired": "1 kredit",
     "yourSongs": "Sizin mahnılarınız",
     "noSongs": "Hələ mahnı yoxdur",
-    "noSongsHint": "Yaratdığınız mahnılar burada görünəcək"
+    "noSongsHint": "Yaratdığınız mahnılar burada görünəcək",
+    "turkicFusionHint": "Şərq və Qərb birləşməsi — türk alətləri + müasir prodüksiya"
   },
   "Explore": {
     "title": "Kəşf",
@@ -186,7 +187,12 @@
     "funk": "Fank",
     "house": "House",
     "techno": "Texno",
-    "indie": "İndi"
+    "indie": "İndi",
+    "turkic_trap": "Türk Trap",
+    "anatolian_jazz": "Anadolu Caz",
+    "sufi_rb": "Sufi R&B",
+    "ottoman_pop": "Osmanlı Pop",
+    "oriental_edm": "Şərq EDM"
   },
   "Comments": {
     "title": "Şərhlər",
@@ -289,5 +295,18 @@
     "autoDeleteSoon": "Tezliklə silinəcək",
     "historyHint": "Silinmiş mahnılar 15 gün saxlanılır, sonra tamamilə silinir",
     "deleteForeverConfirm": "Bu mahnını həmişəlik silməli? Geri qaytarmaq olmaz."
+  },
+  "Instruments": {
+    "title": "Ənənəvi alətlər",
+    "optional": "ixtiyari",
+    "hint": "Mahnınıza türk xalq alətləri əlavə edin",
+    "selected": "{count} seçildi — mahnıda eşidiləcək",
+    "saz": "Saz",
+    "baglama": "Bağlama",
+    "oud": "Ud",
+    "kanun": "Qanun",
+    "ney": "Ney",
+    "kemence": "Kamança",
+    "davul": "Davul"
   }
 }

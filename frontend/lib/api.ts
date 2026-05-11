@@ -6,7 +6,9 @@ import { createClient } from '@/lib/supabase/client';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
 
-export type VoiceType = 'male' | 'female' | 'instrumental' | 'turkic_aura';
+export type VoiceType = 'male' | 'female' | 'instrumental' | 'turkic_aura' | 'turkic_fusion';
+
+export type Instrument = 'saz' | 'baglama' | 'oud' | 'kanun' | 'ney' | 'kemence' | 'davul';
 
 export interface GenerateRequest {
   prompt: string;
@@ -14,6 +16,7 @@ export interface GenerateRequest {
   genres?: string;
   voice_type: VoiceType;
   duration: number;
+  instruments?: Instrument[];
 }
 
 export interface GenerateResponse {

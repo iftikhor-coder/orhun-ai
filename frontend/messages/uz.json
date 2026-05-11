@@ -110,7 +110,8 @@
     "creditsRequired": "1 credit",
     "yourSongs": "Sizning qo'shiqlaringiz",
     "noSongs": "Hali qo'shiq yo'q",
-    "noSongsHint": "Yaratilgan qo'shiqlaringiz shu yerda paydo bo'ladi"
+    "noSongsHint": "Yaratilgan qo'shiqlaringiz shu yerda paydo bo'ladi",
+    "turkicFusionHint": "Sharq va G'arb birlashmasi — turk cholg'ulari + zamonaviy production"
   },
   "Explore": {
     "title": "Kashf",
@@ -186,7 +187,12 @@
     "funk": "Fank",
     "house": "House",
     "techno": "Texno",
-    "indie": "Indi"
+    "indie": "Indi",
+    "turkic_trap": "Turkic Trap",
+    "anatolian_jazz": "Anatoliya Jazz",
+    "sufi_rb": "Sufi R&B",
+    "ottoman_pop": "Usmonli Pop",
+    "oriental_edm": "Sharq EDM"
   },
   "Comments": {
     "title": "Izohlar",
@@ -289,5 +295,18 @@
     "autoDeleteSoon": "Tez orada o'chiriladi",
     "historyHint": "O'chirilgan qo'shiqlar 15 kun saqlanadi, keyin butunlay o'chiriladi",
     "deleteForeverConfirm": "Bu qo'shiqni butunlay o'chiramizmi? Ortga qaytarib bo'lmaydi."
+  },
+  "Instruments": {
+    "title": "An'anaviy cholg'ular",
+    "optional": "ixtiyoriy",
+    "hint": "Qo'shig'ingizga turk xalq cholg'ularini qo'shing",
+    "selected": "{count} ta tanlandi — qo'shiqda jaranglaydi",
+    "saz": "Saz",
+    "baglama": "Bag'lama",
+    "oud": "O'ud",
+    "kanun": "Kanun",
+    "ney": "Nay",
+    "kemence": "Kemencha",
+    "davul": "Davul"
   }
 }

@@ -110,7 +110,8 @@
     "creditsRequired": "1 kredi",
     "yourSongs": "Şarkılarınız",
     "noSongs": "Henüz şarkı yok",
-    "noSongsHint": "Oluşturduğunuz şarkılar burada görünecek"
+    "noSongsHint": "Oluşturduğunuz şarkılar burada görünecek",
+    "turkicFusionHint": "Doğu Batı buluşması — Türk enstrümanları + modern prodüksiyon"
   },
   "Explore": {
     "title": "Keşfet",
@@ -186,7 +187,12 @@
     "funk": "Funk",
     "house": "House",
     "techno": "Tekno",
-    "indie": "Indie"
+    "indie": "Indie",
+    "turkic_trap": "Türk Trap",
+    "anatolian_jazz": "Anadolu Caz",
+    "sufi_rb": "Sufi R&B",
+    "ottoman_pop": "Osmanlı Pop",
+    "oriental_edm": "Doğu EDM"
   },
   "Comments": {
     "title": "Yorumlar",
@@ -289,5 +295,18 @@
     "autoDeleteSoon": "Yakında silinecek",
     "historyHint": "Silinen şarkılar 15 gün saklanır, sonra tamamen silinir",
     "deleteForeverConfirm": "Bu şarkı kalıcı olarak silinsin mi? Geri alınamaz."
+  },
+  "Instruments": {
+    "title": "Geleneksel Enstrümanlar",
+    "optional": "isteğe bağlı",
+    "hint": "Şarkınıza Türk halk enstrümanları ekleyin",
+    "selected": "{count} seçildi — şarkıda yer alacak",
+    "saz": "Saz",
+    "baglama": "Bağlama",
+    "oud": "Ud",
+    "kanun": "Kanun",
+    "ney": "Ney",
+    "kemence": "Kemençe",
+    "davul": "Davul"
   }
 }

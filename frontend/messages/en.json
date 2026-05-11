@@ -110,7 +110,8 @@
     "creditsRequired": "1 credit",
     "yourSongs": "Your songs",
     "noSongs": "No songs yet",
-    "noSongsHint": "Your generated songs will appear here"
+    "noSongsHint": "Your generated songs will appear here",
+    "turkicFusionHint": "East meets West — Turkish instruments blended with modern production"
   },
   "Explore": {
     "title": "Explore",
@@ -186,7 +187,12 @@
     "funk": "Funk",
     "house": "House",
     "techno": "Techno",
-    "indie": "Indie"
+    "indie": "Indie",
+    "turkic_trap": "Turkic Trap",
+    "anatolian_jazz": "Anatolian Jazz",
+    "sufi_rb": "Sufi R&B",
+    "ottoman_pop": "Ottoman Pop",
+    "oriental_edm": "Oriental EDM"
   },
   "Comments": {
     "title": "Comments",
@@ -289,5 +295,18 @@
     "autoDeleteSoon": "Will be deleted soon",
     "historyHint": "Deleted songs are kept for 15 days, then permanently removed",
     "deleteForeverConfirm": "Permanently delete this song? This cannot be undone."
+  },
+  "Instruments": {
+    "title": "Traditional Instruments",
+    "optional": "optional",
+    "hint": "Add Turkish folk instruments to your song",
+    "selected": "{count} selected — will be featured in the song",
+    "saz": "Saz",
+    "baglama": "Baglama",
+    "oud": "Oud",
+    "kanun": "Kanun",
+    "ney": "Ney",
+    "kemence": "Kemence",
+    "davul": "Davul"
   }
 }
