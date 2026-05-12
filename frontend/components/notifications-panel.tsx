@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import {
   Bell, BellOff, Sparkles, Heart, MessageCircle, Megaphone, CheckCheck,
@@ -51,7 +52,24 @@ const ICON_COLORS: Record<string, string> = {
 export function NotificationsPanel() {
   const t = useTranslations('Notifications');
   const locale = useLocale();
-  const { items, unreadCount, markRead, markAllRead, loading } = useNotificationsList();
+  const { items, unreadCount, markRead, markAllRead, loading, setOpen } =
+    useNotificationsList();
+
+  // === XATOLIK YECHIMI (1) ===
+  // Escape klaviatura va body scroll qulflash — panel ochiq turganda
+  // orqa sahifa harakatlanmasligi uchun.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [setOpen]);
 
   const getTitle = (n: NotificationItem): string => {
     const key = `title_${locale}` as keyof NotificationItem;
@@ -79,110 +97,122 @@ export function NotificationsPanel() {
   };
 
   return (
-    <div
-      className={cn(
-        'absolute right-0 top-full mt-2',
-        'w-[380px] max-w-[calc(100vw-2rem)]',
-        'rounded-2xl',
-        'shadow-2xl shadow-black/80',
-        'z-[9999] animate-fade-in',
-        'border border-gold-900/40 overflow-hidden',
-        'bg-midnight-950/98 backdrop-blur-xl'
-      )}
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gold-900/30">
-        <div className="flex items-center gap-2 min-w-0">
-          <Bell className="h-4 w-4 text-gold-400 flex-shrink-0" />
-          <h3 className="font-medium text-gold-100 text-sm truncate">
-            {t('title')}
-          </h3>
+    <>
+      {/* === XATOLIK YECHIMI (1): BACKDROP === */}
+      {/* Orqadagi butun UI'ni qora yarim shaffof + blur bilan yopadi.
+          Bosilsa panelni yopadi. */}
+      <div
+        className="fixed inset-0 bg-black/70 backdrop-blur-md z-[9998] animate-fade-in"
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Panel — pozitsiya saqlanadi (bell tugmasiga nisbatan absolute) */}
+      <div
+        className={cn(
+          'absolute right-0 top-full mt-2',
+          'w-[380px] max-w-[calc(100vw-2rem)]',
+          'rounded-2xl',
+          'shadow-2xl shadow-black/80',
+          'z-[9999] animate-fade-in',
+          'border border-gold-900/40 overflow-hidden',
+          'bg-midnight-950 backdrop-blur-xl' // /98 → toʻliq solid
+        )}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gold-900/30">
+          <div className="flex items-center gap-2 min-w-0">
+            <Bell className="h-4 w-4 text-gold-400 flex-shrink-0" />
+            <h3 className="font-medium text-gold-100 text-sm truncate">
+              {t('title')}
+            </h3>
+            {unreadCount > 0 && (
+              <span className="text-xs text-gold-700 flex-shrink-0">
+                · {unreadCount} {t('unread')}
+              </span>
+            )}
+          </div>
           {unreadCount > 0 && (
-            <span className="text-xs text-gold-700 flex-shrink-0">
-              · {unreadCount} {t('unread')}
-            </span>
+            <button
+              onClick={markAllRead}
+              className="text-xs text-gold-400 hover:text-gold-200 flex items-center gap-1 transition-colors flex-shrink-0"
+            >
+              <CheckCheck className="h-3.5 w-3.5" />
+              {t('markAllRead')}
+            </button>
           )}
         </div>
-        {unreadCount > 0 && (
-          <button
-            onClick={markAllRead}
-            className="text-xs text-gold-400 hover:text-gold-200 flex items-center gap-1 transition-colors flex-shrink-0"
-          >
-            <CheckCheck className="h-3.5 w-3.5" />
-            {t('markAllRead')}
-          </button>
-        )}
-      </div>
 
-      {/* List */}
-      <div className="max-h-[400px] overflow-y-auto">
-        {loading && items.length === 0 ? (
-          <div className="py-12 text-center">
-            <div className="animate-pulse text-gold-700 text-sm">···</div>
-          </div>
-        ) : items.length === 0 ? (
-          <div className="py-12 px-4 text-center">
-            <BellOff className="h-8 w-8 text-gold-700/50 mx-auto mb-3" />
-            <p className="text-sm text-gold-700 italic">{t('empty')}</p>
-            <p className="text-xs text-gold-700/70 mt-1">{t('emptyHint')}</p>
-          </div>
-        ) : (
-          <ul>
-            {items.map((n) => {
-              const Icon = ICONS[n.type] || Bell;
-              const iconColor = ICON_COLORS[n.type] || 'text-gold-300';
-              const title = getTitle(n);
-              const message = getMessage(n);
-              return (
-                <li key={n.id}>
-                  <button
-                    onClick={() => handleClick(n)}
-                    className={cn(
-                      'w-full flex items-start gap-3 px-4 py-3',
-                      'hover:bg-midnight-700/40 transition-colors text-left',
-                      'border-l-2',
-                      !n.is_read ? 'border-gold-500 bg-midnight-800/30' : 'border-transparent'
-                    )}
-                  >
-                    <Icon
+        {/* List */}
+        <div className="max-h-[400px] overflow-y-auto">
+          {loading && items.length === 0 ? (
+            <div className="py-12 text-center">
+              <div className="animate-pulse text-gold-700 text-sm">···</div>
+            </div>
+          ) : items.length === 0 ? (
+            <div className="py-12 px-4 text-center">
+              <BellOff className="h-8 w-8 text-gold-700/50 mx-auto mb-3" />
+              <p className="text-sm text-gold-700 italic">{t('empty')}</p>
+              <p className="text-xs text-gold-700/70 mt-1">{t('emptyHint')}</p>
+            </div>
+          ) : (
+            <ul>
+              {items.map((n) => {
+                const Icon = ICONS[n.type] || Bell;
+                const iconColor = ICON_COLORS[n.type] || 'text-gold-300';
+                const title = getTitle(n);
+                const message = getMessage(n);
+                return (
+                  <li key={n.id}>
+                    <button
+                      onClick={() => handleClick(n)}
                       className={cn(
-                        'h-5 w-5 mt-0.5 flex-shrink-0',
-                        iconColor
+                        'w-full flex items-start gap-3 px-4 py-3',
+                        'hover:bg-midnight-700/40 transition-colors text-left',
+                        'border-l-2',
+                        !n.is_read ? 'border-gold-500 bg-midnight-800/30' : 'border-transparent'
                       )}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div
+                    >
+                      <Icon
                         className={cn(
-                          'text-sm leading-tight',
-                          !n.is_read
-                            ? 'text-gold-100 font-medium'
-                            : 'text-gold-300/80'
+                          'h-5 w-5 mt-0.5 flex-shrink-0',
+                          iconColor
                         )}
-                      >
-                        {title}
-                      </div>
-                      {message && (
-                        <div className="text-xs text-gold-700 mt-1 line-clamp-2 break-words">
-                          {message}
-                        </div>
-                      )}
-                      <div className="text-[10px] text-gold-700/60 mt-1.5">
-                        {timeAgo(n.created_at)}
-                      </div>
-                    </div>
-                    {!n.is_read && (
-                      <span
-                        className="h-2 w-2 rounded-full bg-gold-400 mt-1.5 flex-shrink-0 shadow-sm shadow-gold-500/40"
-                        aria-label="unread"
                       />
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
+                      <div className="flex-1 min-w-0">
+                        <div
+                          className={cn(
+                            'text-sm leading-tight',
+                            !n.is_read
+                              ? 'text-gold-100 font-medium'
+                              : 'text-gold-300/80'
+                          )}
+                        >
+                          {title}
+                        </div>
+                        {message && (
+                          <div className="text-xs text-gold-700 mt-1 line-clamp-2 break-words">
+                            {message}
+                          </div>
+                        )}
+                        <div className="text-[10px] text-gold-700/60 mt-1.5">
+                          {timeAgo(n.created_at)}
+                        </div>
+                      </div>
+                      {!n.is_read && (
+                        <span
+                          className="h-2 w-2 rounded-full bg-gold-400 mt-1.5 flex-shrink-0 shadow-sm shadow-gold-500/40"
+                          aria-label="unread"
+                        />
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
